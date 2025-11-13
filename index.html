@@ -3,68 +3,90 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Srilaxman EU | Portfolio</title>
+  <title>Srilaxman | Portfolio</title>
   <link rel="stylesheet" href="style.css" />
-  <script src="script.js" defer></script>
+  <script defer src="script.js"></script>
 </head>
 <body>
-  <!-- Navbar -->
   <header>
-    <nav class="navbar">
-      <h1 class="logo">Srilaxman EU</h1>
-      <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
+    <div class="container">
+      <h1>Srilaxman E.U</h1>
+      <p>B.Tech Information Technology | 3rd Year</p>
+      <div class="contact">
+        <a href="mailto:srilaxman2005@gmail.com">📧 srilaxman2005@gmail.com</a> |
+        <a href="https://github.com/srilaxmanEU" target="_blank">GitHub</a> |
+        <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+      </div>
+      <div class="resume-buttons">
+        <a href="resume.pdf" class="btn" target="_blank">View Resume</a>
+        <a href="resume.pdf" download class="btn-outline">Download Resume</a>
+      </div>
+    </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <h2>Hello, I'm <span>Srilaxman</span></h2>
-    <p>A passionate IT student and developer</p>
-    <a href="#projects" class="btn">View My Work</a>
-  </section>
-
-  <!-- About Section -->
-  <section id="about" class="about">
+  <section class="about">
     <h2>About Me</h2>
     <p>
-      I’m a 3rd-year B.Tech IT student at Mepco Schlenk Engineering College.
-      I enjoy coding, building creative projects, and exploring new technologies.
+      I’m a passionate Information Technology student from Mepco Schlenk Engineering College.
+      I love creating modern, efficient, and user-friendly applications — from desktop-based
+      Python tools to full-stack web projects. I’m constantly learning new technologies and
+      aim to become a full-stack developer.
     </p>
   </section>
 
-  <!-- Projects Section -->
-  <section id="projects" class="projects">
-    <h2>Projects</h2>
-    <div class="project-container">
-      <div class="project-card">
-        <h3>Medicinal Plant Identifier</h3>
-        <p>Python + Tkinter app with modern UI and MySQL backend.</p>
-      </div>
-      <div class="project-card">
-        <h3>Online Food Processing & Delivery System</h3>
-        <p>Web-based system to manage food orders efficiently.</p>
-      </div>
-      <div class="project-card">
-        <h3>Multi-Game App</h3>
-        <p>Includes Snake, Pong, 2048, and more with Python Tkinter UI.</p>
-      </div>
+  <section class="skills">
+    <h2>Technical Skills</h2>
+    <div class="skill-grid">
+      <div class="skill-box">Python</div>
+      <div class="skill-box">C</div>
+      <div class="skill-box">Java</div>
+      <div class="skill-box">MySQL</div>
+      <div class="skill-box">HTML / CSS / JS</div>
+      <div class="skill-box">Flask</div>
+      <div class="skill-box">Tkinter</div>
+      <div class="skill-box">Docker</div>
     </div>
   </section>
 
-  <!-- Contact Section -->
-  <section id="contact" class="contact">
-    <h2>Contact Me</h2>
-    <p>Let’s collaborate or talk tech!</p>
-    <a href="mailto:srilaxman.eu@example.com" class="btn">Send Email</a>
+  <section class="projects">
+    <h2>Projects</h2>
+    <div class="project-card">
+      <h3>Online Food Processing and Delivery System</h3>
+      <p>
+        A web app for managing online food orders, delivery tracking, and admin management.
+        Built with Python, MySQL, and Flask with a responsive UI.
+      </p>
+    </div>
+
+    <div class="project-card">
+      <h3>Medicinal Plant Identification System</h3>
+      <p>
+        Tkinter + MySQL desktop app for identifying medicinal plants using image recognition.
+        Includes upload feature, plant info display, and modern UI design.
+      </p>
+    </div>
+
+    <div class="project-card">
+      <h3>Multi-Game Hub</h3>
+      <p>
+        A Python application combining multiple games (Snake, Tetris, Pong, etc.) with
+        customizable settings and a seamless interface.
+      </p>
+    </div>
   </section>
 
-  <!-- Footer -->
+  <section class="contact-form">
+    <h2>Contact Me</h2>
+    <form id="contactForm">
+      <input type="text" id="name" placeholder="Your Name" required />
+      <input type="email" id="email" placeholder="Your Email" required />
+      <textarea id="message" placeholder="Your Message" required></textarea>
+      <button type="submit" class="btn">Send Message</button>
+    </form>
+  </section>
+
   <footer>
-    <p>© 2025 Srilaxman EU | All Rights Reserved</p>
+    <p>© 2025 Srilaxman E.U | Built with ❤️ using HTML, CSS, and JS</p>
   </footer>
 </body>
 </html>
