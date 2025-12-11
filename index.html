@@ -4,83 +4,129 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Srilaxman | Portfolio</title>
+  <!-- Anime.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
-  <script defer src="script.js"></script>
 </head>
 <body>
-  <header>
-    <div class="container">
-      <h1>Srilaxman E.U</h1>
-      <p>B.Tech Information Technology | 3rd Year</p>
-      <div class="contact">
-        <a href="mailto:srilaxman2005@gmail.com">📧 srilaxman2005@gmail.com</a> |
-        <a href="https://github.com/Srilaxman05/portfolio" target="_blank">GitHub</a> |
-        <a href="https://www.linkedin.com/in/srilaxman-eu/" target="_blank">LinkedIn</a>
-      </div>
-      <div class="resume-buttons">
-        <a href="resume.pdf" class="btn" target="_blank">View Resume</a>
-        <a href="resume.pdf" download class="btn-outline">Download Resume</a>
+
+  <!-- Background Grid Effect -->
+  <div class="bg-grid"></div>
+
+  <!-- The "Workflow" Line Layer -->
+  <div class="line-container">
+    <svg id="workflow-svg" width="100%" height="100%" preserveAspectRatio="none">
+      <path id="workflow-path" fill="none" stroke="#00b4d8" stroke-width="2" vector-effect="non-scaling-stroke"/>
+    </svg>
+  </div>
+
+  <header id="hero">
+    <div class="container hero-content">
+      <div class="hero-text-wrapper">
+        <h1 class="stagger-hero">Srilaxman E.U</h1>
+        <p class="stagger-hero role">B.Tech Information Technology | 3rd Year</p>
+        
+        <div class="contact stagger-hero">
+          <a href="mailto:srilaxman2005@gmail.com">srilaxman2005@gmail.com</a>
+          <a href="https://github.com/Srilaxman05/portfolio" target="_blank">GitHub</a>
+          <a href="https://www.linkedin.com/in/srilaxman-eu/" target="_blank">LinkedIn</a>
+        </div>
+        
+        <div class="resume-buttons stagger-hero">
+          <a href="resume.pdf" class="btn" target="_blank">View Resume</a>
+          <a href="resume.pdf" download class="btn-outline">Download Resume</a>
+        </div>
       </div>
     </div>
   </header>
 
-  <section class="about">
-    <h2>About Me</h2>
-    <p>
-      I’m a passionate Information Technology student from Mepco Schlenk Engineering College.
-      I love creating modern, efficient, and user-friendly applications — from desktop-based
-      Python tools to full-stack web projects. I’m constantly learning new technologies and
-      aim to become a full-stack developer.
-    </p>
-  </section>
+  <main>
+    <!-- ABOUT NODE -->
+    <section class="section-node" id="about">
+      <div class="node-dot"></div>
+      <div class="content-card">
+        <h2>About Me</h2>
+        <p>
+          I’m a passionate Information Technology student from Mepco Schlenk Engineering College.
+          I love creating modern, efficient, and user-friendly applications — from desktop-based
+          Python tools to full-stack web projects. I’m constantly learning new technologies and
+          aim to become a full-stack developer.
+        </p>
+      </div>
+    </section>
 
-  <section class="skills">
-    <h2>Technical Skills</h2>
-    <div class="skill-grid">
-      <div class="skill-box">Java</div>
-      <div class="skill-box">C</div>
-      <div class="skill-box">C++</div>
-      <div class="skill-box">MySQL</div>
-      <div class="skill-box">HTML</div>
-      <div class="skill-box">CSS</div>
-      <div class="skill-box">JS</div>
-      <div class="skill-box">MongoDB</div>
-    </div>
-  </section>
+    <!-- SKILLS NODE -->
+    <section class="section-node" id="skills">
+      <div class="node-dot"></div>
+      <h2>Technical Skills</h2>
+      <div class="skill-grid">
+        <div class="skill-box">Java</div>
+        <div class="skill-box">C</div>
+        <div class="skill-box">C++</div>
+        <div class="skill-box">MySQL</div>
+        <div class="skill-box">HTML</div>
+        <div class="skill-box">CSS</div>
+        <div class="skill-box">JS</div>
+        <div class="skill-box">MongoDB</div>
+      </div>
+    </section>
 
-  <section class="projects">
-    <h2>Projects</h2>
-    <div class="project-card">
-      <h3>Library Management System</h3>
-      <p>
-        Library Management System built using Java and MySQL for easy management of books and users.
-        It allows adding, issuing, and tracking books with a simple and efficient interface.
-        Technologies Used: Java, MySQL.
-      </p>
-    </div>
+    <!-- PROJECTS NODE -->
+    <section class="section-node" id="projects">
+      <div class="node-dot"></div>
+      <h2>Projects</h2>
+      
+      <div class="project-card">
+        <div class="card-header">
+            <h3>Library Management System</h3>
+            <span class="tag">Java</span>
+        </div>
+        <p>
+          Library Management System built using Java and MySQL for easy management of books and users.
+          Allows adding, issuing, and tracking books efficiently.
+        </p>
+      </div>
 
-    <div class="project-card">
-      <h3>Green cart Application</h3>
-      <p>
-        Grocery shopping app built with React for easy browsing and cart management.
-        It has a clean, responsive design for both desktop and mobile devices.
-        Technologies Used: React, Javascript.
-      </p>
-    </div>
-    
-  <section class="contact-form">
-    <h2>Contact Me</h2>
-    <form id="contactForm">
-      <input type="text" id="name" placeholder="Your Name" required />
-      <input type="email" id="email" placeholder="Your Email" required />
-      <textarea id="message" placeholder="Your Message" required></textarea>
-      <button type="submit" class="btn">Send Message</button>
-    </form>
-  </section>
+      <div class="project-card">
+        <div class="card-header">
+            <h3>Green Cart Application</h3>
+            <span class="tag">React</span>
+        </div>
+        <p>
+          Grocery shopping app built with React for easy browsing and cart management.
+          Clean, responsive design for desktop and mobile.
+        </p>
+      </div>
+    </section>
+
+    <!-- CONTACT NODE -->
+    <section class="section-node" id="contact">
+      <div class="node-dot"></div>
+      <h2>Contact Me</h2>
+      <form id="contactForm">
+        <div class="input-group">
+            <input type="text" id="name" placeholder=" " required />
+            <label>Your Name</label>
+        </div>
+        <div class="input-group">
+            <input type="email" id="email" placeholder=" " required />
+            <label>Your Email</label>
+        </div>
+        <div class="input-group">
+            <textarea id="message" placeholder=" " required></textarea>
+            <label>Your Message</label>
+        </div>
+        <button type="submit" class="btn full-width">Send Message</button>
+      </form>
+    </section>
+  </main>
 
   <footer>
-    <p>© Srilaxman.EU | Built with ❤️</p>
+    <p>© Srilaxman.EU | Built with ❤️ & Anime.js</p>
   </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
-
