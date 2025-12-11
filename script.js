@@ -1,13 +1,26 @@
 // 1. HERO ANIMATION: Slide text in from bottom
-anime.timeline({
+var heroTimeline = anime.timeline({
     easing: 'easeOutExpo',
     duration: 1000
-})
-.add({
+});
+
+// Animate Text Elements
+heroTimeline.add({
     targets: '.stagger-hero',
     translateY: [50, 0],
     opacity: [0, 1],
-    delay: anime.stagger(200, {start: 500})
+    delay: anime.stagger(200, {start: 300})
+});
+
+// NEW: Floating Animation for Profile Image
+// This makes the image bob up and down slightly like a sci-fi node
+anime({
+    targets: '.img-frame',
+    translateY: [-10, 10], // Move up 10px, down 10px
+    direction: 'alternate',
+    loop: true,
+    easing: 'easeInOutSine',
+    duration: 2000
 });
 
 // 2. SVG LINE SETUP (The "n8n" Connector)
@@ -16,16 +29,24 @@ function setupLine() {
     const path = document.querySelector('#workflow-path');
     const svg = document.querySelector('#workflow-svg');
     
+    // Check if elements exist (in case of page errors)
+    if(!path || !svg) return;
+
     // Calculate the height required
-    // We want the line to start from the top of "About" and go down to "Contact"
-    const startY = document.querySelector('#about').offsetTop + 65;
-    const endY = document.querySelector('#contact').offsetTop + 65;
-    const xPos = 20; // Matches CSS margin-left logic
+    const aboutSection = document.querySelector('#about');
+    const contactSection = document.querySelector('#contact');
+    
+    // Safety check
+    if(!aboutSection || !contactSection) return;
+
+    const startY = aboutSection.offsetTop + 65;
+    const endY = contactSection.offsetTop + 65;
+    const xPos = 20; 
 
     // Resize SVG container
     svg.style.height = document.body.scrollHeight + 'px';
 
-    // Draw a straight line with a curve at the bottom (or just straight for simplicity)
+    // Draw straight vertical line
     const d = `M ${xPos} ${startY} L ${xPos} ${endY}`;
     path.setAttribute('d', d);
 
@@ -41,11 +62,13 @@ window.addEventListener('resize', setupLine);
 // 3. SCROLL ANIMATION (Line Drawing)
 window.addEventListener('scroll', () => {
     const path = document.querySelector('#workflow-path');
+    if(!path) return;
+
     const scrollPercentage = (window.scrollY + window.innerHeight * 0.5) / document.body.scrollHeight;
     
     // Draw the line based on how far we scrolled
     const len = path.getTotalLength();
-    const drawLength = len * (scrollPercentage * 1.5); // 1.5 multiplier to finish drawing before footer
+    const drawLength = len * (scrollPercentage * 1.5); 
     
     // Clamp values
     const offset = Math.max(0, len - drawLength);
@@ -61,7 +84,7 @@ const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             
-            // Specific animation for Skills Grid (Grid Stagger)
+            // Specific animation for Skills Grid
             if(entry.target.classList.contains('skill-grid')) {
                 anime({
                     targets: entry.target.children,
