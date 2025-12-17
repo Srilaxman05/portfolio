@@ -12,7 +12,7 @@
   --font-main: 'Inter', sans-serif;
   --transition: all 0.3s ease;
   
-  /* NEW: Mid-level curvy texture variable */
+  /* Mid-level curvy texture variable */
   --curve: 16px; 
 }
 
@@ -24,7 +24,7 @@
 
 html {
   scroll-behavior: smooth;
-  /* Adds global padding for scroll targets so titles aren't hidden */
+  /* CRITICAL: Offset scroll position so titles aren't hidden behind the fixed navbar */
   scroll-padding-top: 100px; 
 }
 
@@ -79,8 +79,20 @@ body {
 }
 
 .logo {
-  font-size: 1.5rem; font-weight: 800; color: var(--text-main);
+  font-size: 1.5rem; 
+  font-weight: 800; 
+  color: var(--text-main);
+  display: flex; 
+  align-items: center;
 }
+
+.logo-img {
+  height: 30px; 
+  width: auto; 
+  margin-right: 12px;
+  border-radius: 4px;
+}
+
 .dot { color: var(--primary); }
 
 .nav-links { display: flex; list-style: none; gap: 30px; }
@@ -146,23 +158,23 @@ body {
 .img-frame {
   width: 340px; height: 340px;
   position: relative; z-index: 1;
-  /* The Image sits inside this padding */
+  /* The Image sits inside this padding, creating the "box lines" effect */
   padding: 15px; 
   border: 2px solid var(--primary);
-  border-radius: var(--curve); /* Curvy Frame */
+  border-radius: var(--curve); 
   transition: var(--transition);
 }
 
 .profile-img {
   width: 100%; height: 100%;
   object-fit: cover;
-  border-radius: calc(var(--curve) - 4px); /* Slightly smaller curve for inner image */
+  /* Inner radius slightly smaller to look nested */
+  border-radius: calc(var(--curve) - 4px); 
   position: relative; z-index: 2;
   box-shadow: 0 0 20px rgba(0,0,0,0.5);
   background-color: #222;
 }
 
-/* Optional: Subtle glow on hover */
 .img-frame:hover {
   box-shadow: 0 0 30px var(--primary-dim);
   transform: scale(1.02);
@@ -176,8 +188,6 @@ main { max-width: 900px; margin: 0 auto; position: relative; padding-bottom: 100
 .section-node {
   position: relative; padding-left: 60px; margin-bottom: 100px;
   opacity: 0;
-  /* Ensures title is visible below fixed navbar when clicked */
-  scroll-margin-top: 120px; 
 }
 
 .node-dot {
@@ -208,7 +218,7 @@ main { max-width: 900px; margin: 0 auto; position: relative; padding-bottom: 100
   border: 1px solid rgba(255,255,255,0.1);
   color: var(--text-main);
   padding: 10px 24px; 
-  border-radius: var(--curve); /* Curvy Pill */
+  border-radius: var(--curve); 
   cursor: default; transition: var(--transition);
   opacity: 0;
 }
@@ -221,7 +231,7 @@ main { max-width: 900px; margin: 0 auto; position: relative; padding-bottom: 100
   background: var(--bg-card);
   border: 1px solid rgba(255,255,255,0.05);
   padding: 25px; 
-  border-radius: var(--curve); /* Curvy Panels */
+  border-radius: var(--curve); 
   margin-bottom: 25px;
   transition: var(--transition);
   opacity: 0;
@@ -244,7 +254,7 @@ main { max-width: 900px; margin: 0 auto; position: relative; padding-bottom: 100
 .btn-sm {
   font-size: 0.8rem; color: var(--primary); border: 1px solid rgba(0,242,255,0.3);
   padding: 6px 14px; 
-  border-radius: var(--curve); /* Curvy Small Buttons */
+  border-radius: var(--curve); 
   text-decoration: none; transition: var(--transition);
   display: inline-block;
 }
@@ -260,7 +270,7 @@ main { max-width: 900px; margin: 0 auto; position: relative; padding-bottom: 100
 input, textarea {
   width: 100%; background: #0a0a0a; border: 1px solid #333; color: #fff;
   padding: 12px; 
-  border-radius: var(--curve); /* Curvy Inputs */
+  border-radius: var(--curve);
   font-family: var(--font-main);
 }
 input:focus, textarea:focus { outline: none; border-color: var(--primary); }
