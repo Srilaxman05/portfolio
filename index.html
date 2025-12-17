@@ -4,59 +4,34 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Srilaxman | Portfolio</title>
+  
+  <!-- Anime.js CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <!-- Google Fonts -->
   <link rel="icon" href="/icon.png" type="image/png">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <!-- CSS Link -->
   <link rel="stylesheet" href="style.css" />
-  <style>
-    /* Inline styles for specific new elements */
-    .bg-grid {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background-image: radial-gradient(#ffffff 1px, transparent 1px);
-      background-size: 40px 40px; opacity: 0.05; z-index: -2;
-    }
-    
-    /* Smooth Scroll Behavior */
-    html { scroll-behavior: smooth; }
-
-    /* Card Actions */
-    .card-actions { margin-top: 15px; display: flex; gap: 10px; }
-    .btn-sm {
-        padding: 8px 16px; font-size: 0.85rem; border-radius: 4px;
-        text-decoration: none; font-weight: 600;
-        border: 1px solid #00b4d8; color: #00b4d8; background: transparent;
-        transition: color 0.3s;
-    }
-    .btn-sm:hover { color: #fff; background: #00b4d8; }
-
-    /* Certificates Grid */
-    .cert-grid {
-        display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 20px; margin-top: 20px;
-    }
-    .cert-card {
-        background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
-        padding: 20px; border-radius: 8px; position: relative;
-    }
-  </style>
 </head>
 <body>
 
+  <!-- Background Grid Effect -->
   <div class="bg-grid"></div>
 
-  <!-- SVG Line Layer (Absolute to document) -->
-  <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden; pointer-events: none;">
+  <!-- The "Workflow" Line Layer (Behind content) -->
+  <div class="line-container">
     <svg id="workflow-svg" width="100%" height="100%">
-      <!-- The path will be drawn by JS -->
-      <path id="workflow-path" fill="none" stroke="#00b4d8" stroke-width="2" stroke-opacity="0.5" />
+      <path id="workflow-path" fill="none" stroke="#00f2ff" stroke-width="2" />
     </svg>
   </div>
 
+  <!-- Navigation Bar -->
   <nav class="navbar">
     <div class="logo">
-      <img src="logo.png" alt="Logo" style="height: 30px; margin-right: 10px; display:inline-block; vertical-align:middle;">
-      Srilaxman<span class="dot" style="color:#00b4d8;">.</span>EU
+      <!-- Replace with logo.png if you have one -->
+      Srilaxman<span class="dot">.</span>EU
     </div>
+
     <ul class="nav-links">
       <li><a href="#hero">Home</a></li>
       <li><a href="#about">About</a></li>
@@ -67,41 +42,54 @@
     </ul>
   </nav>
 
-  <header id="hero" style="min-height: 80vh; display: flex; align-items: center;">
+  <!-- Hero Section -->
+  <header id="hero">
     <div class="container hero-content">
+      
+      <!-- Left Side: Text -->
       <div class="hero-text-wrapper">
         <h1 class="stagger-hero">Srilaxman.EU</h1>
         <p class="stagger-hero role">B.Tech Information Technology | 4th Year</p>
-        <div class="contact stagger-hero" style="margin: 20px 0;">
-          <a href="mailto:srilaxman2005@gmail.com" style="margin-right: 15px;">Email</a>
-          <a href="https://github.com/Srilaxman05" target="_blank" style="margin-right: 15px;">GitHub</a>
+        
+        <div class="contact stagger-hero">
+          <a href="mailto:srilaxman2005@gmail.com">srilaxman2005@gmail.com</a>
+          <a href="https://github.com/Srilaxman05" target="_blank">GitHub</a>
           <a href="https://www.linkedin.com/in/srilaxman-eu/" target="_blank">LinkedIn</a>
         </div>
+        
         <div class="resume-buttons stagger-hero">
-          <a href="resume.pdf" class="btn">View Resume</a>
+          <a href="resume.pdf" class="btn" target="_blank">View Resume</a>
+          <a href="resume.pdf" download class="btn-outline">Download Resume</a>
         </div>
       </div>
+
+      <!-- Right Side: Square Image -->
       <div class="hero-image-wrapper stagger-hero">
-        <div class="img-frame" style="border: 2px solid #00b4d8; padding: 10px; border-radius: 50%;">
-            <img src="image.png" alt="Profile" class="profile-img" style="border-radius: 50%; max-width: 250px;">
+        <div class="img-frame">
+            <!-- Replace 'image.png' with your actual image file -->
+            <img src="image.png" alt="Srilaxman" class="profile-img">
+            <div class="frame-decor"></div>
         </div>
       </div>
+
     </div>
   </header>
 
-  <main style="max-width: 1000px; margin: 0 auto; padding: 0 20px; position: relative;">
-    
-    <!-- Vertical line reference for dots -->
-    <div style="position: absolute; left: 36px; top: 0; bottom: 0; width: 2px; background: rgba(255,255,255,0.1); z-index: -2;"></div>
-
+  <main>
+    <!-- ABOUT NODE -->
     <section class="section-node" id="about">
       <div class="node-dot"></div>
       <div class="content-card">
         <h2>About Me</h2>
-        <p>I’m an IT student with a calm, steady approach to learning and problem-solving.</p>
+        <p>
+          I’m an IT student with a calm, steady approach to learning and problem-solving.
+          I focus on delivering practical, high-quality solutions at a comfortable pace while ensuring alignment with project goals.
+          I enjoy collaborating with teams and contributing meaningfully to shared outcomes.
+        </p>
       </div>
     </section>
 
+    <!-- SKILLS NODE -->
     <section class="section-node" id="skills">
       <div class="node-dot"></div>
       <h2>Technical Skills</h2>
@@ -112,11 +100,13 @@
         <div class="skill-box">MySQL</div>
         <div class="skill-box">HTML</div>
         <div class="skill-box">CSS</div>
-        <div class="skill-box">JS</div>
+        <div class="skill-box">JavaScript</div>
+        <div class="skill-box">React</div>
         <div class="skill-box">MongoDB</div>
       </div>
     </section>
 
+    <!-- PROJECTS NODE -->
     <section class="section-node" id="projects">
       <div class="node-dot"></div>
       <h2>Projects</h2>
@@ -126,9 +116,12 @@
             <h3>Library Management System</h3>
             <span class="tag">Java</span>
         </div>
-        <p>Managed books and users efficiently using Java & MySQL.</p>
+        <p>
+          Library Management System built using Java and MySQL for easy management of books and users.
+          Allows adding, issuing, and tracking books efficiently.
+        </p>
         <div class="card-actions">
-            <a href="#" class="btn-sm hover-btn">GitHub</a>
+            <a href="https://github.com/Srilaxman05" target="_blank" class="btn-sm">View on GitHub</a>
         </div>
       </div>
 
@@ -137,55 +130,93 @@
             <h3>Student Management System</h3>
             <span class="tag">C++</span>
         </div>
-        <p>Console-based record management with file handling.</p>
+        <p>
+          A console-based application for managing student records. 
+          Features include adding, searching, and deleting records, utilizing 
+          <strong>file handling</strong> to store data persistently.
+        </p>
         <div class="card-actions">
-            <a href="#" class="btn-sm hover-btn">GitHub</a>
+            <a href="https://github.com/Srilaxman05" target="_blank" class="btn-sm">View on GitHub</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="card-header">
+            <h3>Green Cart Application</h3>
+            <span class="tag">React</span>
+        </div>
+        <p>
+          Grocery shopping app built with React for easy browsing and cart management.
+          Clean, responsive design for desktop and mobile.
+        </p>
+        <div class="card-actions">
+            <a href="https://github.com/Srilaxman05" target="_blank" class="btn-sm">View on GitHub</a>
         </div>
       </div>
     </section>
 
+    <!-- CERTIFICATES NODE -->
     <section class="section-node" id="certificates">
       <div class="node-dot"></div>
       <h2>Certifications</h2>
+      
       <div class="cert-grid">
-        <div class="cert-card hover-card">
-            <h3>Java Programming</h3>
-            <p>HackerRank</p>
-            <a href="#" class="btn-sm hover-btn">View</a>
+        <div class="cert-card">
+            <div>
+                <h3>Java Programming</h3>
+                <p>Issued by: HackerRank</p>
+            </div>
+            <div class="card-actions">
+                <a href="#" class="btn-sm">View Certificate</a>
+            </div>
         </div>
-        <div class="cert-card hover-card">
-            <h3>Web Development</h3>
-            <p>Udemy</p>
-            <a href="#" class="btn-sm hover-btn">View</a>
+
+        <div class="cert-card">
+            <div>
+                <h3>Web Development</h3>
+                <p>Issued by: Udemy</p>
+            </div>
+            <div class="card-actions">
+                <a href="#" class="btn-sm">View Certificate</a>
+            </div>
         </div>
-        <div class="cert-card hover-card">
-            <h3>Database Mgmt</h3>
-            <p>Coursera</p>
-            <a href="#" class="btn-sm hover-btn">View</a>
+
+        <div class="cert-card">
+            <div>
+                <h3>Database Management</h3>
+                <p>Issued by: Coursera</p>
+            </div>
+            <div class="card-actions">
+                <a href="#" class="btn-sm">View Certificate</a>
+            </div>
         </div>
       </div>
     </section>
 
+    <!-- CONTACT NODE -->
     <section class="section-node" id="contact">
       <div class="node-dot"></div>
       <h2>Contact Me</h2>
       <form id="contactForm">
         <div class="input-group">
-            <input type="text" placeholder="Name" required style="width: 100%; padding: 10px; margin-bottom: 10px; background: #1a1a1a; border: 1px solid #333; color: white;">
+            <input type="text" id="name" placeholder="Your Name" required />
         </div>
         <div class="input-group">
-            <input type="email" placeholder="Email" required style="width: 100%; padding: 10px; margin-bottom: 10px; background: #1a1a1a; border: 1px solid #333; color: white;">
+            <input type="email" id="email" placeholder="Your Email" required />
         </div>
-        <button type="submit" class="btn hover-btn" style="width: 100%; padding: 10px;">Send Message</button>
+        <div class="input-group">
+            <textarea id="message" placeholder="Your Message" required></textarea>
+        </div>
+        <button type="submit" class="btn full-width">Send Message</button>
       </form>
     </section>
-
   </main>
 
-  <footer style="text-align: center; padding: 40px; color: #666;">
-    <p>© Srilaxman.EU | Built with ❤️</p>
+  <footer>
+    <p>© Srilaxman.EU | Built with ❤️ & Anime.js</p>
   </footer>
 
+  <!-- JS Link -->
   <script src="script.js"></script>
 </body>
 </html>
