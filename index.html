@@ -7,38 +7,41 @@
   
   <!-- Anime.js CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-  <!-- Google Fonts -->
+  <!-- Google Fonts (Inter) -->
   <link rel="icon" href="/icon.png" type="image/png">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-  <!-- CSS Link -->
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- Background Grid Effect -->
+  <!-- Background Ambient Glow -->
+  <div class="ambient-glow"></div>
   <div class="bg-grid"></div>
 
-  <!-- The "Workflow" Line Layer (Behind content) -->
+  <!-- The "Workflow" Line Layer -->
   <div class="line-container">
     <svg id="workflow-svg" width="100%" height="100%">
-      <path id="workflow-path" fill="none" stroke="#00f2ff" stroke-width="2" />
+      <!-- Gradient definition for the line -->
+      <defs>
+        <linearGradient id="lineGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" style="stop-color:#ff9966;stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#ff5e62;stop-opacity:1" />
+        </linearGradient>
+      </defs>
+      <path id="workflow-path" fill="none" stroke="url(#lineGradient)" stroke-width="3" />
     </svg>
   </div>
 
-  <!-- Navigation Bar -->
+  <!-- Navbar -->
   <nav class="navbar">
     <div class="logo">
-      <!-- Replace with logo.png if you have one -->
       Srilaxman<span class="dot">.</span>EU
     </div>
-
     <ul class="nav-links">
       <li><a href="#hero">Home</a></li>
       <li><a href="#about">About</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#certificates">Certificates</a></li>
-      <li><a href="#contact" class="btn-nav">Contact</a></li>
+      <li><a href="#projects">Work</a></li>
+      <li><a href="#contact" class="btn-nav">Let's Talk</a></li>
     </ul>
   </nav>
 
@@ -46,29 +49,28 @@
   <header id="hero">
     <div class="container hero-content">
       
-      <!-- Left Side: Text -->
+      <!-- Text Side -->
       <div class="hero-text-wrapper">
-        <h1 class="stagger-hero">Srilaxman.EU</h1>
-        <p class="stagger-hero role">B.Tech Information Technology | 4th Year</p>
+        <div class="badge stagger-hero">Available for work</div>
+        <h1 class="stagger-hero">Automating <br> <span class="text-gradient">The Future.</span></h1>
+        <p class="stagger-hero role">B.Tech Information Technology | Developer</p>
         
-        <div class="contact stagger-hero">
-          <a href="mailto:srilaxman2005@gmail.com">srilaxman2005@gmail.com</a>
-          <a href="https://github.com/Srilaxman05" target="_blank">GitHub</a>
-          <a href="https://www.linkedin.com/in/srilaxman-eu/" target="_blank">LinkedIn</a>
-        </div>
-        
-        <div class="resume-buttons stagger-hero">
-          <a href="resume.pdf" class="btn" target="_blank">View Resume</a>
-          <a href="resume.pdf" download class="btn-outline">Download Resume</a>
+        <div class="hero-actions stagger-hero">
+          <a href="#projects" class="btn-primary">View Projects</a>
+          <div class="socials">
+             <a href="https://github.com/Srilaxman05" target="_blank">GH</a>
+             <a href="https://www.linkedin.com/in/srilaxman-eu/" target="_blank">LI</a>
+          </div>
         </div>
       </div>
 
-      <!-- Right Side: Square Image -->
+      <!-- 3D Tilt Image Wrapper -->
       <div class="hero-image-wrapper stagger-hero">
-        <div class="img-frame">
-            <!-- Replace 'image.png' with your actual image file -->
-            <img src="image.png" alt="Srilaxman" class="profile-img">
-            <div class="frame-decor"></div>
+        <div class="tilt-card" id="profileTilt">
+            <div class="tilt-content">
+                <img src="image.png" alt="Srilaxman" class="profile-img">
+                <div class="glare"></div>
+            </div>
         </div>
       </div>
 
@@ -78,145 +80,116 @@
   <main>
     <!-- ABOUT NODE -->
     <section class="section-node" id="about">
-      <div class="node-dot"></div>
-      <div class="content-card">
+      <div class="node-icon"></div>
+      <div class="glass-panel">
         <h2>About Me</h2>
         <p>
-          I’m an IT student with a calm, steady approach to learning and problem-solving.
-          I focus on delivering practical, high-quality solutions at a comfortable pace while ensuring alignment with project goals.
-          I enjoy collaborating with teams and contributing meaningfully to shared outcomes.
+          I build scalable systems with a focus on automation and efficiency. 
+          Like a well-designed workflow, I believe code should be clean, logical, and effective.
         </p>
       </div>
     </section>
 
     <!-- SKILLS NODE -->
     <section class="section-node" id="skills">
-      <div class="node-dot"></div>
-      <h2>Technical Skills</h2>
+      <div class="node-icon"></div>
+      <h2>Stack & Tools</h2>
       <div class="skill-grid">
-        <div class="skill-box">Java</div>
-        <div class="skill-box">C</div>
-        <div class="skill-box">C++</div>
-        <div class="skill-box">MySQL</div>
-        <div class="skill-box">HTML</div>
-        <div class="skill-box">CSS</div>
-        <div class="skill-box">JavaScript</div>
-        <div class="skill-box">React</div>
-        <div class="skill-box">MongoDB</div>
+        <div class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" width="20"> Java</div>
+        <div class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" width="20"> C++</div>
+        <div class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" width="20"> MySQL</div>
+        <div class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" width="20"> React</div>
+        <div class="skill-pill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width="20"> JS</div>
+        <div class="skill-pill">MongoDB</div>
       </div>
     </section>
 
-    <!-- PROJECTS NODE -->
+    <!-- PROJECTS (Bento Grid) -->
     <section class="section-node" id="projects">
-      <div class="node-dot"></div>
-      <h2>Projects</h2>
+      <div class="node-icon"></div>
+      <h2>Selected Work</h2>
       
-      <div class="project-card">
-        <div class="card-header">
-            <h3>Library Management System</h3>
-            <span class="tag">Java</span>
+      <div class="bento-grid">
+        
+        <!-- Project 1 -->
+        <div class="bento-card project-card">
+            <div class="card-content">
+                <div class="card-top">
+                    <span class="tag">Java</span>
+                    <a href="#" class="icon-link">↗</a>
+                </div>
+                <h3>Library System</h3>
+                <p>Robust management system for efficient book tracking using Java & MySQL.</p>
+            </div>
+            <div class="card-glow"></div>
         </div>
-        <p>
-          Library Management System built using Java and MySQL for easy management of books and users.
-          Allows adding, issuing, and tracking books efficiently.
-        </p>
-        <div class="card-actions">
-            <a href="https://github.com/Srilaxman05" target="_blank" class="btn-sm">View on GitHub</a>
-        </div>
-      </div>
 
-      <div class="project-card">
-        <div class="card-header">
-            <h3>Student Management System</h3>
-            <span class="tag">C++</span>
+        <!-- Project 2 -->
+        <div class="bento-card project-card">
+            <div class="card-content">
+                <div class="card-top">
+                    <span class="tag">C++</span>
+                    <a href="#" class="icon-link">↗</a>
+                </div>
+                <h3>Student Records</h3>
+                <p>High-performance console app with custom file handling architecture.</p>
+            </div>
+            <div class="card-glow"></div>
         </div>
-        <p>
-          A console-based application for managing student records. 
-          Features include adding, searching, and deleting records, utilizing 
-          <strong>file handling</strong> to store data persistently.
-        </p>
-        <div class="card-actions">
-            <a href="https://github.com/Srilaxman05" target="_blank" class="btn-sm">View on GitHub</a>
-        </div>
-      </div>
 
-      <div class="project-card">
-        <div class="card-header">
-            <h3>Green Cart Application</h3>
-            <span class="tag">React</span>
+        <!-- Project 3 -->
+        <div class="bento-card project-card">
+            <div class="card-content">
+                <div class="card-top">
+                    <span class="tag">React</span>
+                    <a href="#" class="icon-link">↗</a>
+                </div>
+                <h3>Green Cart</h3>
+                <p>Modern e-commerce interface designed for mobile-first shopping experiences.</p>
+            </div>
+            <div class="card-glow"></div>
         </div>
-        <p>
-          Grocery shopping app built with React for easy browsing and cart management.
-          Clean, responsive design for desktop and mobile.
-        </p>
-        <div class="card-actions">
-            <a href="https://github.com/Srilaxman05" target="_blank" class="btn-sm">View on GitHub</a>
-        </div>
+
       </div>
     </section>
 
-    <!-- CERTIFICATES NODE -->
+    <!-- CERTIFICATES -->
     <section class="section-node" id="certificates">
-      <div class="node-dot"></div>
+      <div class="node-icon"></div>
       <h2>Certifications</h2>
-      
-      <div class="cert-grid">
-        <div class="cert-card">
-            <div>
-                <h3>Java Programming</h3>
-                <p>Issued by: HackerRank</p>
-            </div>
-            <div class="card-actions">
-                <a href="#" class="btn-sm">View Certificate</a>
-            </div>
+      <div class="bento-grid">
+        <div class="bento-card cert-card">
+            <h3>Java Gold</h3>
+            <p class="issuer">HackerRank</p>
         </div>
-
-        <div class="cert-card">
-            <div>
-                <h3>Web Development</h3>
-                <p>Issued by: Udemy</p>
-            </div>
-            <div class="card-actions">
-                <a href="#" class="btn-sm">View Certificate</a>
-            </div>
+        <div class="bento-card cert-card">
+            <h3>Full Stack</h3>
+            <p class="issuer">Udemy</p>
         </div>
-
-        <div class="cert-card">
-            <div>
-                <h3>Database Management</h3>
-                <p>Issued by: Coursera</p>
-            </div>
-            <div class="card-actions">
-                <a href="#" class="btn-sm">View Certificate</a>
-            </div>
+        <div class="bento-card cert-card">
+            <h3>DB Master</h3>
+            <p class="issuer">Coursera</p>
         </div>
       </div>
     </section>
 
-    <!-- CONTACT NODE -->
+    <!-- CONTACT -->
     <section class="section-node" id="contact">
-      <div class="node-dot"></div>
-      <h2>Contact Me</h2>
+      <div class="node-icon"></div>
+      <h2>Get in Touch</h2>
       <form id="contactForm">
-        <div class="input-group">
-            <input type="text" id="name" placeholder="Your Name" required />
-        </div>
-        <div class="input-group">
-            <input type="email" id="email" placeholder="Your Email" required />
-        </div>
-        <div class="input-group">
-            <textarea id="message" placeholder="Your Message" required></textarea>
-        </div>
-        <button type="submit" class="btn full-width">Send Message</button>
+        <input type="text" placeholder="Name" required />
+        <input type="email" placeholder="Email" required />
+        <textarea placeholder="Tell me about your project..." required></textarea>
+        <button type="submit" class="btn-primary full-width">Send Message</button>
       </form>
     </section>
   </main>
 
   <footer>
-    <p>© Srilaxman.EU | Built with ❤️ & Anime.js</p>
+    <p>© Srilaxman.EU | 2024</p>
   </footer>
 
-  <!-- JS Link -->
   <script src="script.js"></script>
 </body>
 </html>
