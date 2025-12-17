@@ -1,70 +1,52 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // 1. HERO ANIMATION (On Load)
-    // Staggers the text elements and the profile image
+    // --- 1. HERO ANIMATION (Load) ---
     anime.timeline({
         easing: 'easeOutExpo',
-        duration: 1000
+        duration: 1200
     })
     .add({
         targets: '.stagger-hero',
-        translateY: [50, 0],
+        translateY: [40, 0],
         opacity: [0, 1],
-        delay: anime.stagger(200) // 200ms delay between each element
+        delay: anime.stagger(150)
+    })
+    .add({
+        targets: '.img-frame',
+        scale: [0.8, 1],
+        opacity: [0, 1],
+        rotate: [-5, 0],
+        offset: '-=800'
     });
 
-    // 2. SCROLL REVEAL ANIMATION (Intersection Observer)
-    // Triggers animations when sections come into view
-    const observerOptions = {
-        threshold: 0.2 // Trigger when 20% of the element is visible
-    };
+    // --- 2. SCROLL REVEAL OBSERVER ---
+    const observerOptions = { threshold: 0.15 };
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // Animate the Section itself
+                
+                // Animate Section Title/Text
                 anime({
                     targets: entry.target,
                     translateY: [50, 0],
                     opacity: [0, 1],
-                    easing: 'easeOutCubic',
+                    easing: 'easeOutQuad',
                     duration: 800
                 });
 
-                // Specific Animation for Skills Grid
-                if (entry.target.id === 'skills') {
+                // Stagger Children (Skills, Cards)
+                const children = entry.target.querySelectorAll('.skill-box, .project-card, .cert-card');
+                if (children.length > 0) {
                     anime({
-                        targets: '.skill-box',
-                        scale: [0, 1],
+                        targets: children,
+                        translateY: [30, 0],
                         opacity: [0, 1],
-                        delay: anime.stagger(100, {grid: [4, 2], from: 'center'}),
+                        delay: anime.stagger(100),
                         easing: 'spring(1, 80, 10, 0)'
                     });
                 }
-
-                // Specific Animation for Certificates
-                if (entry.target.id === 'certificates') {
-                    anime({
-                        targets: '.cert-card',
-                        translateX: [-50, 0],
-                        opacity: [0, 1],
-                        delay: anime.stagger(150),
-                        easing: 'easeOutQuad'
-                    });
-                }
                 
-                // Specific Animation for Projects
-                if (entry.target.id === 'projects') {
-                    anime({
-                        targets: '.project-card',
-                        translateY: [30, 0],
-                        opacity: [0, 1],
-                        delay: anime.stagger(200),
-                        easing: 'easeOutQuad'
-                    });
-                }
-
-                // Stop observing once animated
                 observer.unobserve(entry.target);
             }
         });
@@ -74,97 +56,86 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(section);
     });
 
-    // 3. ELASTIC BUTTON HOVER EFFECTS
-    // Adds a "jelly" scaling effect when mouse enters buttons
-    const buttons = document.querySelectorAll('.btn, .btn-sm, .skill-box, .cert-card');
-
-    buttons.forEach(btn => {
-        btn.addEventListener('mouseenter', () => {
+    // --- 3. MAGNETIC HOVER EFFECTS ---
+    const hoverElements = document.querySelectorAll('.btn, .btn-sm, .skill-box, .project-card, .cert-card');
+    
+    hoverElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
             anime({
-                targets: btn,
-                scale: 1.05,
-                duration: 800,
-                easing: 'easeOutElastic(1, .6)'
+                targets: el,
+                scale: 1.03,
+                duration: 500,
+                easing: 'easeOutElastic(1, .5)'
             });
         });
-        
-        btn.addEventListener('mouseleave', () => {
+        el.addEventListener('mouseleave', () => {
             anime({
-                targets: btn,
+                targets: el,
                 scale: 1,
-                duration: 600,
-                easing: 'easeOutElastic(1, .6)'
+                duration: 500,
+                easing: 'easeOutElastic(1, .5)'
             });
         });
     });
 
-    // 4. DYNAMIC SVG WORKFLOW LINE
-    // Draws a line connecting the "dots" as you scroll
+    // --- 4. SCROLL-LINKED SVG LINE ---
     const svgPath = document.getElementById('workflow-path');
     const dots = document.querySelectorAll('.node-dot');
-    
-    function updatePath() {
-        if(dots.length === 0) return;
+    const lineContainer = document.querySelector('.line-container');
 
-        let pathString = "";
-        const svgRect = document.getElementById('workflow-svg').getBoundingClientRect();
-        
-        dots.forEach((dot, index) => {
-            const rect = dot.getBoundingClientRect();
-            // Calculate relative coordinates within the SVG
-            const x = rect.left + (rect.width / 2); 
-            const y = rect.top + window.scrollY; // Absolute Y position relative to document
+    function drawLine() {
+        if (dots.length === 0) return;
 
-            if (index === 0) {
-                pathString += `M ${x} ${y} `; // Start point
-            } else {
-                // Create a curved line to the next point
-                const prevDot = dots[index - 1];
-                const prevRect = prevDot.getBoundingClientRect();
-                const prevY = prevRect.top + window.scrollY;
-                
-                // Simple straight line for now, or bezier for curves
-                pathString += `L ${x} ${y} `;
-            }
-        });
+        // Ensure container matches full document height
+        const totalHeight = document.body.scrollHeight;
+        lineContainer.style.height = totalHeight + 'px';
+
+        let pathD = "";
         
-        // Extend line to bottom of last section
-        const lastDot = dots[dots.length - 1];
-        const lastRect = lastDot.getBoundingClientRect();
+        // Start Path at the first dot
+        const firstRect = dots[0].getBoundingClientRect();
+        const startX = firstRect.left + (firstRect.width / 2);
+        const startY = firstRect.top + window.scrollY; // Absolute Y
+
+        pathD += `M ${startX} ${startY} `;
+
+        // Connect subsequent dots
+        for (let i = 1; i < dots.length; i++) {
+            const rect = dots[i].getBoundingClientRect();
+            const x = rect.left + (rect.width / 2);
+            const y = rect.top + window.scrollY;
+            pathD += `L ${x} ${y} `;
+        }
+
+        // Extend line slightly past the last dot
+        const lastRect = dots[dots.length - 1].getBoundingClientRect();
         const lastY = lastRect.top + window.scrollY;
-        pathString += `L ${lastRect.left + lastRect.width/2} ${lastY + 200}`;
+        pathD += `L ${lastRect.left + (lastRect.width / 2)} ${lastY + 150}`;
 
-        svgPath.setAttribute('d', pathString);
-        
-        // Setup stroke animation based on scroll
+        svgPath.setAttribute('d', pathD);
+
+        // Prepare Stroke Animation
         const pathLength = svgPath.getTotalLength();
         svgPath.style.strokeDasharray = pathLength;
-        svgPath.style.strokeDashoffset = pathLength;
+        svgPath.style.strokeDashoffset = pathLength; // Hidden initially
     }
 
-    // Call once to set initial path
-    // Timeout ensures DOM is fully painted
-    setTimeout(() => {
-        updatePath();
+    // Run initially and on resize
+    setTimeout(drawLine, 200); // Small delay to ensure layout is ready
+    window.addEventListener('resize', drawLine);
+
+    // Animate Line on Scroll
+    window.addEventListener('scroll', () => {
+        const pathLength = svgPath.getTotalLength();
+        if (pathLength === 0) return;
+
+        // Calculate scroll percentage relative to document height
+        // Adjusted to start drawing earlier and finish exactly at bottom
+        const scrollPercent = (window.scrollY + window.innerHeight * 0.6) / document.body.scrollHeight;
         
-        // SCROLL-LINKED DRAWING
-        window.addEventListener('scroll', () => {
-            const pathLength = svgPath.getTotalLength();
-            // Calculate how far down we've scrolled (adjusted for viewport height)
-            const scrollPercentage = (window.scrollY + window.innerHeight * 0.6) / document.body.scrollHeight;
-            
-            const drawLength = pathLength * scrollPercentage;
-            
-            // Draw the line by reducing the offset
-            // We clamp it so it doesn't disappear or go negative
-            const offset = Math.max(0, pathLength - drawLength);
-            
-            svgPath.style.strokeDashoffset = offset;
-        });
+        const drawLength = pathLength * scrollPercent;
+        const offset = Math.max(0, pathLength - drawLength);
 
-    }, 500);
-
-    // Update path on resize
-    window.addEventListener('resize', updatePath);
+        svgPath.style.strokeDashoffset = offset;
+    });
 });
-
