@@ -1,141 +1,117 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // --- 1. HERO ANIMATION (Load) ---
+    // --- 1. HERO REVEAL ANIMATION ---
     anime.timeline({
         easing: 'easeOutExpo',
-        duration: 1200
+        duration: 1000
     })
     .add({
         targets: '.stagger-hero',
-        translateY: [40, 0],
+        translateY: [30, 0],
         opacity: [0, 1],
-        delay: anime.stagger(150)
-    })
-    .add({
-        targets: '.img-frame',
-        scale: [0.8, 1],
-        opacity: [0, 1],
-        rotate: [-5, 0],
-        offset: '-=800'
+        delay: anime.stagger(100)
     });
 
-    // --- 2. SCROLL REVEAL OBSERVER ---
-    const observerOptions = { threshold: 0.15 };
+    // --- 2. 3D TILT EFFECT (Mouse Move) ---
+    const tiltCard = document.getElementById('profileTilt');
+    const heroSection = document.getElementById('hero');
 
+    if (tiltCard && heroSection) {
+        heroSection.addEventListener('mousemove', (e) => {
+            const rect = tiltCard.getBoundingClientRect();
+            // Calculate mouse position relative to the card center
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            
+            // Rotation Multipliers (adjust for sensitivity)
+            const rotateX = y / -10; // Invert Y for correct tilt direction
+            const rotateY = x / 10;
+
+            tiltCard.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+
+        // Reset on mouse leave
+        heroSection.addEventListener('mouseleave', () => {
+            tiltCard.style.transform = `rotateX(0deg) rotateY(0deg)`;
+        });
+    }
+
+    // --- 3. SCROLL ANIMATION (Cards & Sections) ---
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                
-                // Animate Section Title/Text
+                // Animate Section Title
                 anime({
                     targets: entry.target,
-                    translateY: [50, 0],
                     opacity: [0, 1],
-                    easing: 'easeOutQuad',
-                    duration: 800
+                    translateY: [20, 0],
+                    duration: 800,
+                    easing: 'easeOutQuad'
                 });
 
-                // Stagger Children (Skills, Cards)
-                const children = entry.target.querySelectorAll('.skill-box, .project-card, .cert-card');
-                if (children.length > 0) {
+                // Animate Children (Bento Cards)
+                const cards = entry.target.querySelectorAll('.bento-card, .skill-pill');
+                if(cards.length > 0) {
                     anime({
-                        targets: children,
-                        translateY: [30, 0],
+                        targets: cards,
                         opacity: [0, 1],
+                        translateY: [30, 0],
                         delay: anime.stagger(100),
-                        easing: 'spring(1, 80, 10, 0)'
+                        duration: 800,
+                        easing: 'easeOutCubic'
                     });
                 }
-                
                 observer.unobserve(entry.target);
             }
         });
-    }, observerOptions);
+    }, { threshold: 0.1 });
 
-    document.querySelectorAll('.section-node').forEach(section => {
-        observer.observe(section);
-    });
+    document.querySelectorAll('.section-node').forEach(section => observer.observe(section));
 
-    // --- 3. MAGNETIC HOVER EFFECTS ---
-    const hoverElements = document.querySelectorAll('.btn, .btn-sm, .skill-box, .project-card, .cert-card');
-    
-    hoverElements.forEach(el => {
-        el.addEventListener('mouseenter', () => {
-            anime({
-                targets: el,
-                scale: 1.03,
-                duration: 500,
-                easing: 'easeOutElastic(1, .5)'
-            });
-        });
-        el.addEventListener('mouseleave', () => {
-            anime({
-                targets: el,
-                scale: 1,
-                duration: 500,
-                easing: 'easeOutElastic(1, .5)'
-            });
-        });
-    });
-
-    // --- 4. SCROLL-LINKED SVG LINE ---
+    // --- 4. WORKFLOW LINE DRAWING ---
     const svgPath = document.getElementById('workflow-path');
-    const dots = document.querySelectorAll('.node-dot');
-    const lineContainer = document.querySelector('.line-container');
-
+    const nodes = document.querySelectorAll('.node-icon');
+    
     function drawLine() {
-        if (dots.length === 0) return;
-
-        // Ensure container matches full document height
-        const totalHeight = document.body.scrollHeight;
-        lineContainer.style.height = totalHeight + 'px';
-
-        let pathD = "";
+        if (!svgPath || nodes.length === 0) return;
         
-        // Start Path at the first dot
-        const firstRect = dots[0].getBoundingClientRect();
-        const startX = firstRect.left + (firstRect.width / 2);
-        const startY = firstRect.top + window.scrollY; // Absolute Y
+        // Match container height to document
+        const totalHeight = document.body.scrollHeight;
+        document.querySelector('.line-container').style.height = totalHeight + 'px';
 
-        pathD += `M ${startX} ${startY} `;
+        let path = "";
+        
+        // Start from hero text bottom approximate area
+        const startX = nodes[0].getBoundingClientRect().left + 7; // Center of 14px node
+        const startY = 300; // Arbitrary start near hero
 
-        // Connect subsequent dots
-        for (let i = 1; i < dots.length; i++) {
-            const rect = dots[i].getBoundingClientRect();
-            const x = rect.left + (rect.width / 2);
+        path += `M ${startX} ${startY} `;
+
+        nodes.forEach(node => {
+            const rect = node.getBoundingClientRect();
             const y = rect.top + window.scrollY;
-            pathD += `L ${x} ${y} `;
-        }
+            path += `L ${startX} ${y} `;
+        });
 
-        // Extend line slightly past the last dot
-        const lastRect = dots[dots.length - 1].getBoundingClientRect();
-        const lastY = lastRect.top + window.scrollY;
-        pathD += `L ${lastRect.left + (lastRect.width / 2)} ${lastY + 150}`;
-
-        svgPath.setAttribute('d', pathD);
-
-        // Prepare Stroke Animation
-        const pathLength = svgPath.getTotalLength();
-        svgPath.style.strokeDasharray = pathLength;
-        svgPath.style.strokeDashoffset = pathLength; // Hidden initially
+        // Extend to bottom
+        path += `L ${startX} ${totalHeight}`;
+        
+        svgPath.setAttribute('d', path);
+        
+        // Set Stroke for Animation
+        const len = svgPath.getTotalLength();
+        svgPath.style.strokeDasharray = len;
+        svgPath.style.strokeDashoffset = len;
     }
 
-    // Run initially and on resize
-    setTimeout(drawLine, 200); // Small delay to ensure layout is ready
+    setTimeout(drawLine, 100);
     window.addEventListener('resize', drawLine);
 
-    // Animate Line on Scroll
+    // Scroll Listener for Line
     window.addEventListener('scroll', () => {
-        const pathLength = svgPath.getTotalLength();
-        if (pathLength === 0) return;
-
-        // Calculate scroll percentage relative to document height
-        // Adjusted to start drawing earlier and finish exactly at bottom
-        const scrollPercent = (window.scrollY + window.innerHeight * 0.6) / document.body.scrollHeight;
-        
-        const drawLength = pathLength * scrollPercent;
-        const offset = Math.max(0, pathLength - drawLength);
-
-        svgPath.style.strokeDashoffset = offset;
+        const len = svgPath.getTotalLength();
+        const scrollPercent = (window.scrollY + window.innerHeight * 0.5) / document.body.scrollHeight;
+        const draw = len * scrollPercent;
+        svgPath.style.strokeDashoffset = len - draw;
     });
 });
