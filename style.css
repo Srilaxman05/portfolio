@@ -2,18 +2,14 @@
    1. CSS VARIABLES & RESET
    ========================================= */
 :root {
-  /* Color Palette - Dark & Cyan */
-  --bg-dark: #050505;       /* Ultra dark background */
-  --bg-card: #111111;       /* Card background */
-  --bg-card-hover: #1a1a1a; /* Lighter card on hover */
-  
+  --bg-dark: #050505;
+  --bg-card: #111111;
   --primary: #00f2ff;       /* Electric Cyan */
   --primary-dim: rgba(0, 242, 255, 0.1);
-  --secondary: #707070;     /* Grey text */
-  --text-main: #ffffff;     /* White text */
-  
-  --font-main: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  --text-main: #ffffff;
+  --text-secondary: #a0a0a0;
+  --font-main: 'Inter', sans-serif;
+  --transition: all 0.3s ease;
 }
 
 * {
@@ -31,276 +27,154 @@ body {
   background-color: var(--bg-dark);
   color: var(--text-main);
   line-height: 1.6;
-  overflow-x: hidden; /* Prevent horizontal scroll bars */
+  overflow-x: hidden;
+  position: relative;
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: var(--bg-dark);
-}
-::-webkit-scrollbar-thumb {
-  background: #333;
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--primary);
-}
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-dark); }
+::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--primary); }
 
 /* =========================================
-   2. BACKGROUND GRID & EFFECTS
+   2. BACKGROUND EFFECTS
    ========================================= */
-/* The "Tech" Grid Background */
 .bg-grid {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  top: 0; left: 0; width: 100vw; height: 100vh;
   z-index: -2;
-  background-size: 50px 50px;
-  background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-image: linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
   mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
   pointer-events: none;
 }
 
-/* The SVG Container for the Line */
 .line-container {
-  position: absolute; /* Changed to absolute to track full document height */
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%; /* Will be calculated by JS to match body height */
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
   z-index: -1;
   pointer-events: none;
 }
 
 /* =========================================
-   3. NAVIGATION
+   3. NAVBAR
    ========================================= */
 .navbar {
-  position: fixed;
-  top: 0;
-  width: 100%;
+  position: fixed; top: 0; width: 100%;
   padding: 20px 50px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: flex; justify-content: space-between; align-items: center;
   z-index: 1000;
-  
-  /* Glassmorphism */
-  background: rgba(5, 5, 5, 0.8);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(5, 5, 5, 0.9);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
 .logo {
-  font-size: 1.5rem;
-  font-weight: 800;
-  letter-spacing: -1px;
-  color: var(--text-main);
+  font-size: 1.5rem; font-weight: 800; color: var(--text-main);
 }
+.dot { color: var(--primary); }
 
-.dot {
-  color: var(--primary);
-}
-
-.nav-links {
-  display: flex;
-  list-style: none;
-  gap: 30px;
-}
-
-.nav-links a {
-  text-decoration: none;
-  color: var(--secondary);
-  font-size: 0.9rem;
-  font-weight: 500;
-  transition: var(--transition);
-}
-
-.nav-links a:hover {
-  color: var(--primary);
-}
+.nav-links { display: flex; list-style: none; gap: 30px; }
+.nav-links a { text-decoration: none; color: var(--text-secondary); font-size: 0.95rem; transition: var(--transition); }
+.nav-links a:hover { color: var(--primary); }
 
 .btn-nav {
   color: var(--primary) !important;
   border: 1px solid var(--primary);
-  padding: 8px 18px;
-  border-radius: 4px;
+  padding: 8px 18px; border-radius: 4px;
 }
-
-.btn-nav:hover {
-  background: var(--primary);
-  color: var(--bg-dark) !important;
-  box-shadow: 0 0 15px var(--primary-dim);
-}
+.btn-nav:hover { background: var(--primary); color: var(--bg-dark) !important; }
 
 /* =========================================
    4. HERO SECTION
    ========================================= */
 #hero {
   min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
+  display: flex; align-items: center; justify-content: center;
   padding-top: 60px;
 }
 
-.container {
-  max-width: 1200px;
-  width: 90%;
-  margin: 0 auto;
-}
-
-.hero-content {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.hero-text-wrapper {
-  flex: 1;
-}
+.container { width: 90%; max-width: 1200px; margin: 0 auto; }
+.hero-content { display: flex; align-items: center; justify-content: space-between; }
+.hero-text-wrapper { flex: 1; }
 
 .hero-text-wrapper h1 {
-  font-size: 4.5rem;
-  line-height: 1;
-  font-weight: 800;
-  margin-bottom: 15px;
-  background: linear-gradient(to right, #fff, #999);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  font-size: 4rem; line-height: 1.1; font-weight: 800; margin-bottom: 15px;
 }
-
-.role {
-  font-size: 1.2rem;
-  color: var(--primary);
-  margin-bottom: 30px;
-  font-family: monospace; /* Tech feel */
-}
+.role { font-size: 1.2rem; color: var(--primary); margin-bottom: 30px; }
 
 .contact a {
-  color: var(--secondary);
-  margin-right: 20px;
-  text-decoration: none;
-  font-size: 0.95rem;
-  transition: var(--transition);
-  border-bottom: 1px solid transparent;
+  color: var(--text-secondary); margin-right: 20px; text-decoration: none;
+  font-size: 0.95rem; transition: var(--transition);
 }
+.contact a:hover { color: var(--primary); }
 
-.contact a:hover {
-  color: var(--primary);
-  border-color: var(--primary);
-}
+.resume-buttons { margin-top: 30px; display: flex; gap: 15px; }
 
-.resume-buttons {
-  margin-top: 30px;
-  display: flex;
-  gap: 15px;
-}
-
+/* Button Styles */
 .btn {
-  background: var(--primary);
-  color: var(--bg-dark);
-  padding: 12px 28px;
-  border-radius: 2px; /* Sharp corners for modern look */
-  text-decoration: none;
-  font-weight: 700;
-  border: 1px solid var(--primary);
-  transition: var(--transition);
+  background: var(--primary); color: var(--bg-dark);
+  padding: 12px 28px; border-radius: 4px; text-decoration: none; font-weight: 700;
+  border: 1px solid var(--primary); transition: var(--transition);
 }
-
-.btn:hover {
-  box-shadow: 0 0 20px var(--primary-dim);
-  transform: translateY(-2px);
-}
+.btn:hover { box-shadow: 0 0 20px var(--primary-dim); transform: translateY(-2px); }
 
 .btn-outline {
-  background: transparent;
-  color: var(--primary);
-  padding: 12px 28px;
-  border-radius: 2px;
-  text-decoration: none;
-  font-weight: 700;
-  border: 1px solid var(--primary-dim);
-  transition: var(--transition);
+  background: transparent; color: var(--primary);
+  padding: 12px 28px; border-radius: 4px; text-decoration: none; font-weight: 700;
+  border: 1px solid var(--primary); transition: var(--transition);
 }
+.btn-outline:hover { background: var(--primary-dim); box-shadow: 0 0 20px var(--primary-dim); }
 
-.btn-outline:hover {
-  border-color: var(--primary);
-  box-shadow: 0 0 20px var(--primary-dim);
-}
-
-.hero-image-wrapper {
-  flex: 1;
-  display: flex;
-  justify-content: flex-end;
-}
+/* --- SQUARE IMAGE STYLES --- */
+.hero-image-wrapper { flex: 1; display: flex; justify-content: flex-end; }
 
 .img-frame {
-  width: 350px;
-  height: 350px;
-  border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.1);
-  padding: 15px;
-  position: relative;
-}
-
-/* Glowing ring behind image */
-.img-frame::before {
-  content: '';
-  position: absolute;
-  inset: -10px;
-  border-radius: 50%;
-  border: 1px solid var(--primary);
-  opacity: 0.3;
-  filter: blur(5px);
-  z-index: -1;
+  width: 320px; height: 320px;
+  position: relative; z-index: 1;
 }
 
 .profile-img {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
+  width: 100%; height: 100%;
   object-fit: cover;
-  filter: grayscale(20%);
+  border-radius: 2px; /* Slight edge */
+  position: relative; z-index: 2;
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+  background-color: #222;
+}
+
+.frame-decor {
+  position: absolute;
+  top: 20px; right: -20px;
+  width: 100%; height: 100%;
+  border: 2px solid var(--primary);
+  border-radius: 2px;
+  z-index: 1;
   transition: var(--transition);
 }
 
-.img-frame:hover .profile-img {
-  filter: grayscale(0%);
+.img-frame:hover .frame-decor {
+  top: 10px; right: -10px;
+  box-shadow: 0 0 20px var(--primary-dim);
 }
 
 /* =========================================
-   5. MAIN CONTENT NODES
+   5. SECTIONS & NODES
    ========================================= */
-main {
-  max-width: 900px;
-  margin: 0 auto;
-  position: relative;
-  padding-bottom: 100px;
-}
+main { max-width: 900px; margin: 0 auto; position: relative; padding-bottom: 100px; }
 
 .section-node {
-  position: relative;
-  padding-left: 80px; /* Space for the line */
-  margin-bottom: 100px;
-  opacity: 0; /* Hidden initially for Anime.js */
+  position: relative; padding-left: 60px; margin-bottom: 100px;
+  opacity: 0; /* Animation Start State */
 }
 
-/* The Dot on the Line */
 .node-dot {
-  position: absolute;
-  left: 21px; /* Center with the SVG line */
-  top: 5px;
-  width: 12px;
-  height: 12px;
+  position: absolute; left: 24px; top: 8px;
+  width: 12px; height: 12px;
   background: var(--bg-dark);
   border: 2px solid var(--primary);
   border-radius: 50%;
@@ -309,227 +183,76 @@ main {
 }
 
 .section-node h2 {
-  font-size: 2rem;
-  margin-bottom: 30px;
-  color: var(--text-main);
-  display: flex;
-  align-items: center;
+  font-size: 2rem; margin-bottom: 30px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding-bottom: 10px; display: inline-block;
 }
 
-/* Decorative line after heading */
-.section-node h2::after {
-  content: '';
-  display: block;
-  height: 1px;
-  width: 60px;
-  background: var(--primary);
-  margin-left: 20px;
-  opacity: 0.5;
-}
-
-.section-node p {
-  color: var(--secondary);
-  font-size: 1.05rem;
-  max-width: 700px;
-}
+.section-node p { color: var(--text-secondary); font-size: 1rem; max-width: 700px; }
 
 /* =========================================
-   6. SKILLS GRID
+   6. CARDS & GRID
    ========================================= */
-.skill-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-}
+.skill-grid { display: flex; flex-wrap: wrap; gap: 12px; }
 
 .skill-box {
   background: var(--bg-card);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255,255,255,0.1);
   color: var(--text-main);
-  padding: 10px 24px;
-  font-size: 0.9rem;
-  border-radius: 100px; /* Pill shape */
-  cursor: default;
-  transition: var(--transition);
-  opacity: 0; /* Handled by Anime.js */
+  padding: 10px 24px; border-radius: 50px;
+  cursor: default; transition: var(--transition);
+  opacity: 0;
 }
-
 .skill-box:hover {
-  border-color: var(--primary);
-  color: var(--primary);
-  background: rgba(0, 242, 255, 0.05);
+  border-color: var(--primary); color: var(--primary);
   box-shadow: 0 0 15px var(--primary-dim);
 }
 
-/* =========================================
-   7. PROJECTS & CERTIFICATES (Cards)
-   ========================================= */
 .project-card, .cert-card {
   background: var(--bg-card);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  padding: 30px;
-  border-radius: 8px;
-  margin-bottom: 30px;
+  border: 1px solid rgba(255,255,255,0.05);
+  padding: 25px; border-radius: 6px;
+  margin-bottom: 25px;
   transition: var(--transition);
-  position: relative;
-  overflow: hidden;
-  opacity: 0; /* Handled by Anime.js */
+  opacity: 0;
 }
-
-/* Hover Effect: Glow border */
 .project-card:hover, .cert-card:hover {
   transform: translateY(-5px);
-  border-color: rgba(0, 242, 255, 0.3);
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  border-color: rgba(0,242,255,0.3);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 15px;
-}
+.card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.card-header h3, .cert-card h3 { color: var(--text-main); font-size: 1.25rem; }
+.tag { color: var(--primary); font-size: 0.8rem; border: 1px solid var(--primary-dim); padding: 2px 8px; border-radius: 4px; }
 
-.card-header h3, .cert-card h3 {
-  font-size: 1.4rem;
-  color: var(--text-main);
-}
-
-.tag {
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--primary);
-  border: 1px solid var(--primary-dim);
-  padding: 4px 8px;
-  border-radius: 4px;
-}
-
-/* Certificate Specific Grid */
-.cert-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
-}
-
-.cert-card p {
-  font-size: 0.9rem;
-  color: #666;
-  margin-top: 5px;
-}
-
-/* Small Buttons inside Cards */
-.card-actions {
-  margin-top: 20px;
-}
-
+.card-actions { margin-top: 15px; }
 .btn-sm {
-  display: inline-block;
-  font-size: 0.85rem;
-  font-weight: 600;
-  text-decoration: none;
-  color: var(--primary);
-  border: 1px solid rgba(0, 242, 255, 0.3);
-  padding: 8px 16px;
-  border-radius: 4px;
-  transition: var(--transition);
+  font-size: 0.8rem; color: var(--primary); border: 1px solid rgba(0,242,255,0.3);
+  padding: 6px 14px; border-radius: 4px; text-decoration: none; transition: var(--transition);
 }
+.btn-sm:hover { background: var(--primary); color: var(--bg-dark); }
 
-.btn-sm:hover {
-  background: var(--primary);
-  color: var(--bg-dark);
-}
+.cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+.cert-card { display: flex; flex-direction: column; justify-content: space-between; }
 
 /* =========================================
-   8. CONTACT FORM
+   7. FORM
    ========================================= */
-#contactForm {
-  background: var(--bg-card);
-  padding: 40px;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.input-group {
-  position: relative;
-  margin-bottom: 20px;
-}
-
-.input-group label {
-  display: none; /* Placeholder used for cleaner look */
-}
-
+.input-group { margin-bottom: 15px; }
 input, textarea {
-  width: 100%;
-  background: rgba(0, 0, 0, 0.3);
-  border: 1px solid #333;
-  color: #fff;
-  padding: 15px;
-  border-radius: 4px;
-  font-family: var(--font-main);
-  font-size: 1rem;
-  transition: var(--transition);
+  width: 100%; background: #0a0a0a; border: 1px solid #333; color: #fff;
+  padding: 12px; border-radius: 4px; font-family: var(--font-main);
 }
+input:focus, textarea:focus { outline: none; border-color: var(--primary); }
+.full-width { width: 100%; }
 
-input:focus, textarea:focus {
-  outline: none;
-  border-color: var(--primary);
-  background: rgba(0, 242, 255, 0.02);
-}
+footer { text-align: center; padding: 40px; color: #555; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 50px; }
 
-textarea {
-  min-height: 120px;
-  resize: vertical;
-}
-
-.full-width {
-  width: 100%;
-  margin-top: 10px;
-}
-
-/* =========================================
-   9. FOOTER
-   ========================================= */
-footer {
-  text-align: center;
-  padding: 40px;
-  font-size: 0.9rem;
-  color: #555;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-/* =========================================
-   10. MEDIA QUERIES
-   ========================================= */
+/* Mobile */
 @media (max-width: 768px) {
-  .hero-content {
-    flex-direction: column-reverse;
-    text-align: center;
-  }
-
-  .hero-text-wrapper h1 {
-    font-size: 3rem;
-  }
-
-  .hero-image-wrapper {
-    justify-content: center;
-    margin-bottom: 40px;
-  }
-  
-  .img-frame {
-    width: 250px;
-    height: 250px;
-  }
-
-  .nav-links {
-    display: none; /* Hide nav links on mobile for simplicity */
-  }
-  
-  .section-node {
-    padding-left: 50px; /* Reduce padding */
-  }
-  
-  .line-container {
-     left: -10px; /* Shift line slightly left on mobile */
-  }
+  .hero-content { flex-direction: column-reverse; text-align: center; }
+  .img-frame { width: 250px; height: 250px; margin-bottom: 40px; }
+  .nav-links { display: none; }
+  .section-node { padding-left: 40px; }
 }
