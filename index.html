@@ -4,35 +4,38 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Srilaxman | Portfolio</title>
-  
-  <!-- Anime.js CDN -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-  <!-- Google Fonts -->
   <link rel="icon" href="/icon.png" type="image/png">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-  <!-- CSS Link -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- Background Grid Effect -->
+  <!-- Grain overlay -->
+  <div class="grain"></div>
+  <!-- Ambient glow -->
+  <div class="ambient"></div>
+  <!-- BG Grid -->
   <div class="bg-grid"></div>
-
-  <!-- The "Workflow" Line Layer -->
+  <!-- SVG Workflow line -->
   <div class="line-container">
     <svg id="workflow-svg" width="100%" height="100%">
-      <path id="workflow-path" fill="none" stroke="#00f2ff" stroke-width="2" />
+      <defs>
+        <linearGradient id="lineGrad" x1="0" y1="0" x2="0" y2="1" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#c8f04a" stop-opacity="0.8"/>
+          <stop offset="100%" stop-color="#4af0c8" stop-opacity="0.2"/>
+        </linearGradient>
+      </defs>
+      <path id="workflow-path" fill="none" stroke="url(#lineGrad)" stroke-width="1.5" />
     </svg>
   </div>
 
-  <!-- Navigation Bar -->
+  <!-- NAVBAR -->
   <nav class="navbar">
     <div class="logo">
-      <!-- Logo Image before the name -->
-      <img src="logo.png" alt="Logo" class="logo-img"> 
+      <img src="logo.png" alt="Logo" class="logo-img">
       Srilaxman<span class="dot">.</span>EU
     </div>
-
     <ul class="nav-links">
       <li><a href="#hero">Home</a></li>
       <li><a href="#about">About</a></li>
@@ -41,196 +44,279 @@
       <li><a href="#certificates">Certificates</a></li>
       <li><a href="#contact" class="btn-nav">Contact</a></li>
     </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
 
-  <!-- Hero Section -->
+  <!-- MOBILE NAV -->
+  <div class="mobile-nav" id="mobileNav">
+    <ul>
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#certificates">Certificates</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- HERO -->
   <header id="hero">
     <div class="container hero-content">
-      
-      <!-- Left Side: Text -->
       <div class="hero-text-wrapper">
-        <h1 class="stagger-hero">Srilaxman.EU</h1>
-        <p class="stagger-hero role">B.Tech Information Technology | 4th Year</p>
-        
-        <div class="contact stagger-hero">
-          <a href="mailto:srilaxman2005@gmail.com">srilaxman2005@gmail.com</a>
-          <a href="https://github.com/Srilaxman05" target="_blank">GitHub</a>
-          <a href="https://www.linkedin.com/in/srilaxman-eu/" target="_blank">LinkedIn</a>
+        <div class="hero-label stagger-hero">
+          <span class="status-dot"></span>
+          B.Tech Information Technology · 4th Year
         </div>
-        
+        <h1 class="stagger-hero">
+          Sri<span class="accent">laxman</span><span class="dot">.</span><span class="eu">EU</span>
+        </h1>
+        <p class="hero-sub stagger-hero">
+          Developer. Problem Solver. Builder.
+        </p>
+        <div class="hero-links stagger-hero">
+          <a href="mailto:srilaxman2005@gmail.com" class="hero-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
+            srilaxman2005@gmail.com
+          </a>
+          <a href="https://github.com/Srilaxman05" target="_blank" class="hero-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.49.5.09.66-.22.66-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0112 6.8c.85 0 1.71.11 2.51.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.16.58.67.48A10.01 10.01 0 0022 12c0-5.52-4.48-10-10-10z"/></svg>
+            GitHub
+          </a>
+          <a href="https://www.linkedin.com/in/srilaxman-eu/" target="_blank" class="hero-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.44-2.14 2.93v5.68H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 110-4.12 2.06 2.06 0 010 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.72V1.72C24 .77 23.21 0 22.23 0z"/></svg>
+            LinkedIn
+          </a>
+        </div>
         <div class="resume-buttons stagger-hero">
           <a href="resume.pdf" class="btn" target="_blank">View Resume</a>
           <a href="resume.pdf" download class="btn-outline">Download Resume</a>
         </div>
       </div>
 
-      <!-- Right Side: Curvy Framed Image -->
       <div class="hero-image-wrapper stagger-hero">
         <div class="img-frame">
-            <!-- Replace 'image.png' with your actual image file -->
-            <img src="image.png" alt="Srilaxman" class="profile-img">
+          <div class="corner tl"></div>
+          <div class="corner br"></div>
+          <img src="image.png" alt="Srilaxman" class="profile-img">
+          <div class="img-tag">SL</div>
+        </div>
+        <div class="hero-stat-row">
+          <div class="hero-stat">
+            <div class="stat-n">4th</div>
+            <div class="stat-l">Year</div>
+          </div>
+          <div class="hero-stat-sep"></div>
+          <div class="hero-stat">
+            <div class="stat-n">3+</div>
+            <div class="stat-l">Projects</div>
+          </div>
+          <div class="hero-stat-sep"></div>
+          <div class="hero-stat">
+            <div class="stat-n">4+</div>
+            <div class="stat-l">Certs</div>
+          </div>
         </div>
       </div>
+    </div>
 
+    <div class="scroll-hint">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
     </div>
   </header>
 
   <main>
-    <!-- ABOUT NODE -->
+
+    <!-- ABOUT -->
     <section class="section-node" id="about">
       <div class="node-dot"></div>
       <div class="content-card">
+        <div class="section-label">01 — About</div>
         <h2>About Me</h2>
         <p>
-          I’m an IT student with a calm, steady approach to learning and problem-solving.
+          I'm an IT student with a calm, steady approach to learning and problem-solving.
           I focus on delivering practical, high-quality solutions at a comfortable pace while ensuring alignment with project goals.
           I enjoy collaborating with teams and contributing meaningfully to shared outcomes.
         </p>
       </div>
     </section>
 
-    <!-- SKILLS NODE -->
+    <!-- SKILLS -->
     <section class="section-node" id="skills">
       <div class="node-dot"></div>
+      <div class="section-label">02 — Skills</div>
       <h2>Technical Skills</h2>
       <div class="skill-grid">
-        <div class="skill-box">Java</div>
-        <div class="skill-box">C</div>
-        <div class="skill-box">C++</div>
-        <div class="skill-box">MySQL</div>
-        <div class="skill-box">HTML</div>
-        <div class="skill-box">CSS</div>
-        <div class="skill-box">JavaScript</div>
-        <div class="skill-box">React</div>
-        <div class="skill-box">MongoDB</div>
+        <div class="skill-box"><span class="skill-icon">☕</span>Java</div>
+        <div class="skill-box"><span class="skill-icon">⚙</span>C</div>
+        <div class="skill-box"><span class="skill-icon">⚙</span>C++</div>
+        <div class="skill-box"><span class="skill-icon">🗄</span>MySQL</div>
+        <div class="skill-box"><span class="skill-icon">🌐</span>HTML</div>
+        <div class="skill-box"><span class="skill-icon">🎨</span>CSS</div>
+        <div class="skill-box"><span class="skill-icon">⚡</span>JavaScript</div>
+        <div class="skill-box"><span class="skill-icon">⚛</span>React</div>
+        <div class="skill-box"><span class="skill-icon">🍃</span>MongoDB</div>
       </div>
     </section>
 
-    <!-- PROJECTS NODE -->
+    <!-- PROJECTS -->
     <section class="section-node" id="projects">
       <div class="node-dot"></div>
+      <div class="section-label">03 — Work</div>
       <h2>Projects</h2>
-      
+
       <div class="project-card">
         <div class="card-header">
+          <div>
+            <div class="proj-num">P — 01</div>
             <h3>Library Management System</h3>
-            <span class="tag">Java</span>
+          </div>
+          <span class="tag">Java</span>
         </div>
-        <p>
-          Library Management System built using Java and MySQL for easy management of books and users.
-          Allows adding, issuing, and tracking books efficiently.
-        </p>
+        <p>Library Management System built using Java and MySQL for easy management of books and users. Allows adding, issuing, and tracking books efficiently.</p>
         <div class="card-actions">
-            <a href="https://github.com/Srilaxman05/Library-management-system" target="_blank" class="btn-sm">View on GitHub</a>
+          <a href="https://github.com/Srilaxman05/Library-management-system" target="_blank" class="btn-sm">
+            View on GitHub
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
         </div>
       </div>
 
       <div class="project-card">
         <div class="card-header">
+          <div>
+            <div class="proj-num">P — 02</div>
             <h3>Student Management System</h3>
-            <span class="tag">C++</span>
+          </div>
+          <span class="tag">C++</span>
         </div>
-        <p>
-          A console-based application for managing student records. 
-          Features include adding, searching, and deleting records, utilizing 
-          <strong>file handling</strong> to store data persistently.
-        </p>
+        <p>A console-based application for managing student records. Features include adding, searching, and deleting records, utilizing <strong>file handling</strong> to store data persistently.</p>
         <div class="card-actions">
-            <a href="https://github.com/Srilaxman05/Student-management-system" target="_blank" class="btn-sm">View on GitHub</a>
+          <a href="https://github.com/Srilaxman05/Student-management-system" target="_blank" class="btn-sm">
+            View on GitHub
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
         </div>
       </div>
 
       <div class="project-card">
         <div class="card-header">
+          <div>
+            <div class="proj-num">P — 03</div>
             <h3>Green Cart Application</h3>
-            <span class="tag">React</span>
+          </div>
+          <span class="tag">React</span>
         </div>
-        <p>
-          Grocery shopping app built with React for easy browsing and cart management.
-          Clean, responsive design for desktop and mobile.
-        </p>
+        <p>Grocery shopping app built with React for easy browsing and cart management. Clean, responsive design for desktop and mobile.</p>
         <div class="card-actions">
-            <a href="https://github.com/Srilaxman05/Green-cart-application" target="_blank" class="btn-sm">View on GitHub</a>
+          <a href="https://github.com/Srilaxman05/Green-cart-application" target="_blank" class="btn-sm">
+            View on GitHub
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
         </div>
       </div>
     </section>
 
-    <!-- CERTIFICATES NODE -->
+    <!-- CERTIFICATES -->
     <section class="section-node" id="certificates">
       <div class="node-dot"></div>
+      <div class="section-label">04 — Credentials</div>
       <h2>Certifications</h2>
-      
       <div class="cert-grid">
+
         <div class="cert-card">
-            <div>
-                <h3>Programming using Java</h3>
-                <p>Issued by: Infosys Springboard</p>
-            </div>
-            <div class="card-actions">
-                <a href="programjava.pdf" class="btn-sm">View Certificate</a>
-            </div>
+          <div class="cert-icon">☕</div>
+          <div class="cert-body">
+            <h3>Programming using Java</h3>
+            <p>Infosys Springboard</p>
+          </div>
+          <div class="card-actions">
+            <a href="programjava.pdf" class="btn-sm">View
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
         </div>
 
         <div class="cert-card">
-            <div>
-                <h3>Cloud Computing</h3>
-                <p>Issued by: NPTEL</p>
-            </div>
-            <div class="card-actions">
-                <a href="cloudcomputing.pdf" class="btn-sm">View Certificate</a>
-            </div>
+          <div class="cert-icon">☁</div>
+          <div class="cert-body">
+            <h3>Cloud Computing</h3>
+            <p>NPTEL</p>
+          </div>
+          <div class="card-actions">
+            <a href="cloudcomputing.pdf" class="btn-sm">View
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
         </div>
 
         <div class="cert-card">
-            <div>
-                <h3>Introduction to SQL</h3>
-                <p>Issued by: Simplilearn</p>
-            </div>
-            <div class="card-actions">
-                <a href="sql.pdf" class="btn-sm">View Certificate</a>
-            </div>
+          <div class="cert-icon">🗄</div>
+          <div class="cert-body">
+            <h3>Introduction to SQL</h3>
+            <p>Simplilearn</p>
+          </div>
+          <div class="card-actions">
+            <a href="sql.pdf" class="btn-sm">View
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
         </div>
 
         <div class="cert-card">
-            <div>
-                <h3>Python coder</h3>
-                <p>Issued by: Kaggle</p>
-            </div>
-            <div class="card-actions">
-                <a href="kagglepython.pdf" class="btn-sm">View Certificate</a>
-            </div>
+          <div class="cert-icon">🐍</div>
+          <div class="cert-body">
+            <h3>Python Coder</h3>
+            <p>Kaggle</p>
+          </div>
+          <div class="card-actions">
+            <a href="kagglepython.pdf" class="btn-sm">View
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
         </div>
+
       </div>
     </section>
 
-    <!-- CONTACT NODE -->
+    <!-- CONTACT -->
     <section class="section-node" id="contact">
       <div class="node-dot"></div>
-      <h2>Contact Me</h2>
+      <div class="section-label">05 — Contact</div>
+      <h2>Get in Touch</h2>
+      <p class="contact-sub">Have a project in mind? Let's talk.</p>
       <form id="contactForm">
         <div class="input-group">
-            <input type="text" id="name" placeholder="Your Name" required />
+          <label for="name">Name</label>
+          <input type="text" id="name" placeholder="Your name" required />
         </div>
         <div class="input-group">
-            <input type="email" id="email" placeholder="Your Email" required />
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="your@email.com" required />
         </div>
         <div class="input-group">
-            <textarea id="message" placeholder="Your Message" required></textarea>
+          <label for="message">Message</label>
+          <textarea id="message" rows="5" placeholder="Tell me about your project..." required></textarea>
         </div>
         <button type="submit" class="btn full-width">Send Message</button>
       </form>
     </section>
+
   </main>
 
   <footer>
-    <p>© Srilaxman.EU | Built with ❤️ & Anime.js</p>
+    <div class="footer-inner">
+      <div class="footer-logo">Srilaxman<span class="dot">.</span>EU</div>
+      <p>© 2025 Srilaxman.EU · Built with ❤️ &amp; Anime.js</p>
+      <div class="footer-links">
+        <a href="https://github.com/Srilaxman05" target="_blank">GitHub</a>
+        <a href="https://www.linkedin.com/in/srilaxman-eu/" target="_blank">LinkedIn</a>
+      </div>
+    </div>
   </footer>
 
   <script src="script.js"></script>
 </body>
 </html>
-
-
-
-
-
