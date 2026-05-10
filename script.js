@@ -1,140 +1,203 @@
 document.addEventListener('DOMContentLoaded', () => {
-    
-    // --- 1. HERO ANIMATION (Load) ---
-    anime.timeline({
-        easing: 'easeOutExpo',
-        duration: 1200
+
+  // ── 1. HERO ENTRY ANIMATION ──────────────────────────────
+  anime.timeline({ easing: 'easeOutExpo', duration: 1100 })
+    .add({
+      targets: '.stagger-hero',
+      translateY: [36, 0],
+      opacity: [0, 1],
+      delay: anime.stagger(130)
     })
     .add({
-        targets: '.stagger-hero',
-        translateY: [40, 0],
-        opacity: [0, 1],
-        delay: anime.stagger(150)
+      targets: '.img-frame',
+      scale: [0.9, 1],
+      opacity: [0, 1],
+      duration: 900,
+      easing: 'easeOutQuint',
+      offset: '-=800'
     })
     .add({
-        targets: '.img-frame',
-        scale: [0.8, 1],
+      targets: '.hero-stat-row',
+      translateY: [16, 0],
+      opacity: [0, 1],
+      duration: 600,
+      offset: '-=500'
+    });
+
+  // ── 2. SCROLL REVEAL ─────────────────────────────────────
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+
+      anime({
+        targets: entry.target,
+        translateY: [45, 0],
         opacity: [0, 1],
-        rotate: [-5, 0],
-        offset: '-=800'
-    });
+        duration: 850,
+        easing: 'easeOutQuart'
+      });
 
-    // --- 2. SCROLL REVEAL OBSERVER ---
-    const observerOptions = { threshold: 0.15 };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                
-                // Animate Section Title/Text
-                anime({
-                    targets: entry.target,
-                    translateY: [50, 0],
-                    opacity: [0, 1],
-                    easing: 'easeOutQuad',
-                    duration: 800
-                });
-
-                // Stagger Children (Skills, Cards)
-                const children = entry.target.querySelectorAll('.skill-box, .project-card, .cert-card');
-                if (children.length > 0) {
-                    anime({
-                        targets: children,
-                        translateY: [30, 0],
-                        opacity: [0, 1],
-                        delay: anime.stagger(100),
-                        easing: 'spring(1, 80, 10, 0)'
-                    });
-                }
-                
-                observer.unobserve(entry.target);
-            }
+      const staggered = entry.target.querySelectorAll('.skill-box, .project-card, .cert-card');
+      if (staggered.length > 0) {
+        anime({
+          targets: staggered,
+          translateY: [28, 0],
+          opacity: [0, 1],
+          delay: anime.stagger(80, { start: 180 }),
+          duration: 700,
+          easing: 'easeOutQuart'
         });
-    }, observerOptions);
+      }
 
-    document.querySelectorAll('.section-node').forEach(section => {
-        observer.observe(section);
+      observer.unobserve(entry.target);
     });
+  }, { threshold: 0.1 });
 
-    // --- 3. MAGNETIC HOVER EFFECTS ---
-    const hoverElements = document.querySelectorAll('.btn, .btn-sm, .skill-box, .project-card, .cert-card');
-    
-    hoverElements.forEach(el => {
-        el.addEventListener('mouseenter', () => {
-            anime({
-                targets: el,
-                scale: 1.03,
-                duration: 500,
-                easing: 'easeOutElastic(1, .5)'
-            });
+  document.querySelectorAll('.section-node').forEach(el => observer.observe(el));
+
+  // ── 3. NODE DOT GLOW ON APPROACH ─────────────────────────
+  const dotObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const dot = entry.target.querySelector('.node-dot');
+      if (!dot) return;
+      if (entry.isIntersecting) {
+        anime({
+          targets: dot,
+          scale: [1, 1.5, 1],
+          duration: 600,
+          easing: 'easeOutElastic(1, .6)'
         });
-        el.addEventListener('mouseleave', () => {
-            anime({
-                targets: el,
-                scale: 1,
-                duration: 500,
-                easing: 'easeOutElastic(1, .5)'
-            });
-        });
+      }
     });
+  }, { threshold: 0.4 });
 
-    // --- 4. SCROLL-LINKED SVG LINE ---
-    const svgPath = document.getElementById('workflow-path');
-    const dots = document.querySelectorAll('.node-dot');
-    const lineContainer = document.querySelector('.line-container');
+  document.querySelectorAll('.section-node').forEach(el => dotObserver.observe(el));
 
-    function drawLine() {
-        if (dots.length === 0) return;
+  // ── 4. MAGNETIC HOVER ────────────────────────────────────
+  document.querySelectorAll('.btn, .btn-outline, .btn-sm, .skill-box').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      anime({ targets: el, scale: 1.04, duration: 400, easing: 'easeOutElastic(1, .5)' });
+    });
+    el.addEventListener('mouseleave', () => {
+      anime({ targets: el, scale: 1, duration: 400, easing: 'easeOutElastic(1, .5)' });
+    });
+  });
 
-        // Ensure container matches full document height
-        const totalHeight = document.body.scrollHeight;
-        lineContainer.style.height = totalHeight + 'px';
+  // ── 5. SCROLL-LINKED SVG WORKFLOW LINE ───────────────────
+  const svgPath      = document.getElementById('workflow-path');
+  const dots         = document.querySelectorAll('.node-dot');
+  const lineContainer = document.querySelector('.line-container');
 
-        let pathD = "";
-        
-        // Start Path at the first dot
-        const firstRect = dots[0].getBoundingClientRect();
-        const startX = firstRect.left + (firstRect.width / 2);
-        const startY = firstRect.top + window.scrollY; // Absolute Y
+  function drawLine() {
+    if (!dots.length || !svgPath) return;
 
-        pathD += `M ${startX} ${startY} `;
+    const totalH = document.body.scrollHeight;
+    lineContainer.style.height = totalH + 'px';
 
-        // Connect subsequent dots
-        for (let i = 1; i < dots.length; i++) {
-            const rect = dots[i].getBoundingClientRect();
-            const x = rect.left + (rect.width / 2);
-            const y = rect.top + window.scrollY;
-            pathD += `L ${x} ${y} `;
-        }
+    const firstRect = dots[0].getBoundingClientRect();
+    const sx = firstRect.left + firstRect.width / 2;
+    const sy = firstRect.top + window.scrollY;
 
-        // Extend line slightly past the last dot
-        const lastRect = dots[dots.length - 1].getBoundingClientRect();
-        const lastY = lastRect.top + window.scrollY;
-        pathD += `L ${lastRect.left + (lastRect.width / 2)} ${lastY + 150}`;
+    let d = `M ${sx} ${sy} `;
 
-        svgPath.setAttribute('d', pathD);
-
-        // Prepare Stroke Animation
-        const pathLength = svgPath.getTotalLength();
-        svgPath.style.strokeDasharray = pathLength;
-        svgPath.style.strokeDashoffset = pathLength; // Hidden initially
+    for (let i = 1; i < dots.length; i++) {
+      const r = dots[i].getBoundingClientRect();
+      const x = r.left + r.width / 2;
+      const y = r.top + window.scrollY;
+      // Soft cubic bezier between each node
+      const mid = (sy + y) / 2;
+      d += `C ${sx} ${mid}, ${x} ${mid}, ${x} ${y} `;
     }
 
-    // Run initially and on resize
-    setTimeout(drawLine, 200);
-    window.addEventListener('resize', drawLine);
+    const lastR = dots[dots.length - 1].getBoundingClientRect();
+    const lx = lastR.left + lastR.width / 2;
+    const ly = lastR.top + window.scrollY;
+    d += `L ${lx} ${ly + 120}`;
 
-    // Animate Line on Scroll
-    window.addEventListener('scroll', () => {
-        const pathLength = svgPath.getTotalLength();
-        if (pathLength === 0) return;
+    svgPath.setAttribute('d', d);
 
-        // Calculate scroll percentage relative to document height
-        const scrollPercent = (window.scrollY + window.innerHeight * 0.6) / document.body.scrollHeight;
-        
-        const drawLength = pathLength * scrollPercent;
-        const offset = Math.max(0, pathLength - drawLength);
+    const len = svgPath.getTotalLength();
+    svgPath.style.strokeDasharray = len;
+    svgPath.style.strokeDashoffset = len;
+  }
 
-        svgPath.style.strokeDashoffset = offset;
+  setTimeout(drawLine, 250);
+  window.addEventListener('resize', drawLine);
+
+  window.addEventListener('scroll', () => {
+    const len = svgPath ? svgPath.getTotalLength() : 0;
+    if (!len) return;
+    const pct = (window.scrollY + window.innerHeight * 0.55) / document.body.scrollHeight;
+    svgPath.style.strokeDashoffset = Math.max(0, len - len * pct);
+  }, { passive: true });
+
+  // ── 6. NAVBAR SCROLL SHADOW ──────────────────────────────
+  const navbar = document.querySelector('.navbar');
+  window.addEventListener('scroll', () => {
+    navbar.style.borderBottomColor = window.scrollY > 30
+      ? 'rgba(200,240,74,0.08)'
+      : 'rgba(255,255,255,0.07)';
+  }, { passive: true });
+
+  // ── 7. HAMBURGER MENU ────────────────────────────────────
+  const hamburger = document.getElementById('hamburger');
+  const mobileNav = document.getElementById('mobileNav');
+
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileNav.classList.toggle('open');
+  });
+
+  // Close on link click
+  mobileNav.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileNav.classList.remove('open');
     });
+  });
+
+  // ── 8. CONTACT FORM ──────────────────────────────────────
+  const form = document.getElementById('contactForm');
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const btn = form.querySelector('button[type="submit"]');
+      const original = btn.textContent;
+
+      anime({
+        targets: btn,
+        scale: [1, 0.97, 1],
+        duration: 400,
+        easing: 'easeOutQuad'
+      });
+
+      btn.textContent = 'Message Sent ✓';
+      btn.style.background = '#4af0c8';
+      btn.style.cursor = 'default';
+
+      setTimeout(() => {
+        btn.textContent = original;
+        btn.style.background = '';
+        btn.style.cursor = '';
+        form.reset();
+      }, 3000);
+    });
+  }
+
+  // ── 9. SMOOTH ACTIVE NAV HIGHLIGHT ───────────────────────
+  const sections = document.querySelectorAll('header[id], section[id]');
+  const navAs = document.querySelectorAll('.nav-links a');
+
+  const secObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navAs.forEach(a => {
+          a.style.color = a.getAttribute('href') === '#' + entry.target.id ? '#f0ede8' : '';
+        });
+      }
+    });
+  }, { threshold: 0.4, rootMargin: '-60px 0px -60px 0px' });
+
+  sections.forEach(s => secObserver.observe(s));
+
 });
